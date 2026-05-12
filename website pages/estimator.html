@@ -1,0 +1,1640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Outdoor Lighting Quote Estimator | Music City Outdoor Lighting</title>
+<meta name="description" content="Get a free outdoor lighting estimate in 90 seconds. Answer five quick questions about your Nashville-area property and receive a scoped cost range.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b16;
+  --bg-2: #0b1020;
+  --ink: #f5efe1;
+  --ink-dim: #a9a394;
+  --ink-faint: #5a5547;
+  --amber: #f0c074;
+  --amber-glow: #ffd89a;
+  --amber-dim: rgba(240,192,116,.18);
+  --rule: rgba(245,239,225,.14);
+  --rule-strong: rgba(245,239,225,.28);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+body { overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ── Page header (matches service pages) ── */
+.page-head {
+  padding: 32px 48px; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  position: sticky; top: 0; background: rgba(7,11,22,.92); backdrop-filter: blur(12px); z-index: 80;
+}
+.page-head .brand { display: flex; align-items: baseline; gap: 14px; }
+.page-head .brand h1 { font-family: var(--serif); font-weight: 300; font-size: 22px; letter-spacing: -.005em; }
+.page-head .brand h1 em { font-style: italic; color: var(--amber); }
+.page-head .brand .tag { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-dim); }
+.page-head .nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.page-head .nav a { padding: 8px 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-dim); border: 1px solid transparent; border-radius: 999px; transition: all .2s; }
+.page-head .nav a:hover { color: var(--ink); }
+.page-head .nav a.on { color: var(--amber); border-color: var(--rule); }
+@media (max-width: 768px) { .page-head { padding: 20px 24px; flex-wrap: wrap; } }
+
+/* Background glow */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(240,192,116,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 80% 10%, rgba(240,192,116,.04) 0%, transparent 60%);
+}
+
+.wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* ── Header ── */
+.hd {
+  padding: 56px 0 44px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 48px;
+}
+.hd .eyebrow {
+  font-size: 10px; letter-spacing: .38em; text-transform: uppercase;
+  color: var(--amber); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.hd .eyebrow::before { content: ""; display: block; width: 40px; height: 1px; background: var(--amber); }
+.hd h2 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(38px, 6vw, 64px);
+  line-height: .95; letter-spacing: -.02em;
+}
+.hd h2 em { font-style: italic; color: var(--amber); }
+.hd p { margin-top: 18px; font-size: 15px; line-height: 1.6; color: var(--ink-dim); max-width: 54ch; }
+
+/* ── Progress rail ── */
+.progress-rail { display: flex; align-items: center; gap: 0; margin-bottom: 44px; }
+.p-step { display: flex; align-items: center; gap: 0; flex: 1; }
+.p-dot {
+  width: 32px; height: 32px; border-radius: 50%; flex: 0 0 32px;
+  border: 1px solid var(--rule-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .06em; color: var(--ink-dim);
+  transition: all .4s ease; position: relative; background: var(--bg-2);
+}
+.p-dot.active { border-color: var(--amber); color: var(--amber); box-shadow: 0 0 20px -4px rgba(240,192,116,.55); background: rgba(240,192,116,.08); }
+.p-dot.done { border-color: var(--amber); background: var(--amber); color: var(--bg); }
+.p-dot.done::after { content: "✓"; font-weight: 700; font-size: 13px; }
+.p-dot:not(.done) .pn { display: block; }
+.p-dot.done .pn { display: none; }
+.p-line { flex: 1; height: 1px; background: var(--rule); transition: background .4s ease; }
+.p-line.done { background: var(--amber); }
+.p-label {
+  position: absolute; top: 38px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint);
+  white-space: nowrap; transition: color .3s;
+}
+.p-dot.active .p-label, .p-dot.done .p-label { color: var(--amber); }
+
+/* ── Step cards ── */
+.step { display: none; }
+.step.active { display: block; animation: fadeUp .4s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.step-title { font-family: var(--serif); font-weight: 300; font-size: 32px; line-height: 1.05; margin-bottom: 6px; letter-spacing: -.01em; }
+.step-title em { font-style: italic; color: var(--amber); }
+.step-sub { font-size: 13px; color: var(--ink-dim); margin-bottom: 32px; line-height: 1.5; }
+
+/* Option grids */
+.opt-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-bottom: 28px; }
+.opt-grid.two { grid-template-columns: 1fr 1fr; }
+
+.opt {
+  padding: 22px 20px 18px; border: 1px solid var(--rule); border-radius: 4px;
+  background: rgba(11,16,32,.7); cursor: pointer; transition: all .25s ease; position: relative; user-select: none;
+}
+.opt:hover { border-color: var(--rule-strong); background: rgba(15,22,42,.9); }
+.opt.sel { border-color: var(--amber); background: rgba(240,192,116,.08); box-shadow: 0 0 28px -8px rgba(240,192,116,.35); }
+.opt-icon { font-size: 26px; margin-bottom: 10px; line-height: 1; color: var(--amber); }
+.opt-icon svg { display: block; }
+.ai-upload-icon svg { display: block; margin: 0 auto; }
+.opt-name { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.1; margin-bottom: 4px; }
+.opt-desc { font-size: 11px; color: var(--ink-dim); line-height: 1.45; }
+.opt .chk {
+  position: absolute; top: 12px; right: 14px; width: 18px; height: 18px; border-radius: 50%;
+  border: 1px solid var(--rule-strong); transition: all .2s ease;
+  display: flex; align-items: center; justify-content: center; font-size: 9px; color: transparent;
+}
+.opt.sel .chk { background: var(--amber); border-color: var(--amber); color: #1a1305; font-weight: 700; }
+.opt.sel .chk::after { content: "✓"; }
+
+/* Slider */
+.slider-wrap { margin-bottom: 28px; }
+.slider-labels { display: flex; justify-content: space-between; margin-bottom: 12px; }
+.slider-labels span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-dim); }
+.slider-labels .cur { font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--amber); letter-spacing: 0; text-transform: none; font-weight: 300; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 2px; background: var(--rule-strong); border-radius: 999px; outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--amber); border: 2px solid var(--bg); box-shadow: 0 0 14px rgba(240,192,116,.6); transition: box-shadow .2s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 22px rgba(240,192,116,.9); }
+.slider-ticks { display: flex; justify-content: space-between; margin-top: 10px; }
+.slider-ticks span { font-size: 10px; color: var(--ink-faint); letter-spacing: .1em; }
+
+/* Text / select inputs */
+.field-row { margin-bottom: 20px; }
+.field-row label { display: block; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 8px; }
+.field-row input, .field-row select, .field-row textarea {
+  width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--rule-strong);
+  color: var(--ink); font: inherit; font-size: 15px; padding: 12px 0; outline: none; transition: border-color .2s;
+}
+.field-row input:focus, .field-row select:focus, .field-row textarea:focus { border-bottom-color: var(--amber); }
+.field-row select option { background: var(--bg-2); color: var(--ink); }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Multi-select tags */
+.tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.tag {
+  padding: 8px 16px; border-radius: 999px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  border: 1px solid var(--rule); color: var(--ink-dim); cursor: pointer; transition: all .2s ease; background: transparent;
+}
+.tag:hover { border-color: var(--rule-strong); color: var(--ink); }
+.tag.sel { border-color: var(--amber); color: var(--amber); background: var(--amber-dim); }
+
+/* Note box */
+.note {
+  background: rgba(240,192,116,.06); border: 1px solid rgba(240,192,116,.2);
+  border-radius: 4px; padding: 16px 18px; font-size: 13px; line-height: 1.55; color: var(--ink-dim); margin-bottom: 28px;
+}
+.note strong { color: var(--amber); }
+
+/* Nav buttons */
+.nav-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; transition: all .2s ease; cursor: pointer; border: 0;
+}
+.btn-amber { background: var(--amber); color: #1a1305; }
+.btn-amber:hover { background: var(--amber-glow); box-shadow: 0 12px 32px -10px rgba(240,192,116,.55); }
+.btn-ghost { background: transparent; border: 1px solid var(--rule-strong); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.btn-text { background: transparent; color: var(--ink-dim); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; padding: 13px 0; }
+.btn-text:hover { color: var(--ink); }
+
+/* ── QUOTE RESULT ── */
+.quote-card { border: 1px solid var(--rule); border-radius: 6px; background: rgba(11,16,32,.85); overflow: hidden; margin-bottom: 24px; }
+.quote-header {
+  padding: 32px 36px; border-bottom: 1px solid var(--rule);
+  background: linear-gradient(135deg, rgba(240,192,116,.10) 0%, transparent 60%);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.quote-header h2 { font-family: var(--serif); font-weight: 300; font-size: 42px; line-height: 1; }
+.quote-header h2 em { font-style: italic; color: var(--amber); }
+.quote-range { text-align: right; }
+.quote-range .label { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
+.quote-range .price { font-family: var(--serif); font-size: 52px; font-weight: 300; color: var(--amber); line-height: 1; }
+.quote-range .price-sub { font-size: 12px; color: var(--ink-dim); margin-top: 4px; }
+
+.quote-body { padding: 28px 36px; }
+.quote-line {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 14px;
+}
+.quote-line:last-child { border-bottom: 0; }
+.quote-line .qn { color: var(--ink-dim); }
+.quote-line .qv { font-family: var(--serif); font-size: 18px; font-weight: 400; }
+.quote-line .qv.hi { color: var(--amber); }
+.quote-line .dot-line { flex: 1; border-bottom: 1px dotted var(--rule); margin: 0 8px; position: relative; top: -4px; }
+
+.scope-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+.scope-item { padding: 16px; border: 1px solid var(--rule); border-radius: 4px; background: rgba(7,11,22,.5); }
+.scope-item .si-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
+.scope-item .si-val { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--ink); }
+.scope-item .si-val em { font-style: italic; color: var(--amber); }
+
+.fixtures-list { margin-top: 20px; display: flex; flex-direction: column; gap: 6px; }
+.fix-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 4px;
+  background: rgba(240,192,116,.04); border: 1px solid rgba(240,192,116,.12); font-size: 13px;
+}
+.fix-row .led { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px rgba(240,192,116,.7); flex: 0 0 8px; }
+.fix-row .fn { flex: 1; font-family: var(--serif); font-size: 17px; }
+.fix-row .fc { color: var(--ink-dim); font-size: 12px; letter-spacing: .04em; }
+
+.disclaimer { font-size: 11px; color: var(--ink-faint); line-height: 1.55; border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 4px; }
+
+.code-block {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px;
+  background: rgba(240,192,116,.06); border: 1px solid var(--amber); border-radius: 4px; margin: 20px 0; flex-wrap: wrap;
+}
+.code-block .the-code { font-family: "Courier New", monospace; font-size: 22px; letter-spacing: .18em; color: var(--amber); font-weight: 700; }
+.code-block .code-note { font-size: 11px; color: var(--ink-dim); line-height: 1.4; }
+.copy-btn { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); cursor: pointer; background: none; border: 0; font-family: var(--sans); padding: 6px 0; transition: opacity .2s; }
+.copy-btn:hover { opacity: .7; }
+
+.cta-strip { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+/* ── Responsiveness ── */
+@media (max-width: 640px) {
+  .wrap { padding: 0 18px 60px; }
+  .opt-grid { grid-template-columns: 1fr 1fr; }
+  .field-grid { grid-template-columns: 1fr; }
+  .scope-grid { grid-template-columns: 1fr 1fr; }
+  .quote-header { flex-direction: column; align-items: flex-start; }
+  .quote-range { text-align: left; }
+}
+@media (max-width: 400px) {
+  .opt-grid { grid-template-columns: 1fr; }
+  .scope-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════
+   AI PHOTO ESTIMATOR SECTION
+══════════════════════════════════════════ */
+
+/* Divider between quiz and AI section */
+.or-divider {
+  display: flex; align-items: center; gap: 24px;
+  max-width: 860px; margin: 0 auto 0; padding: 0 32px;
+}
+.or-divider-line { flex: 1; height: 1px; background: var(--rule); }
+.or-divider-pill {
+  flex: 0 0 auto; padding: 10px 28px; border-radius: 999px;
+  border: 1px solid var(--rule-strong); font-size: 10px;
+  letter-spacing: .32em; text-transform: uppercase; color: var(--ink-dim);
+  background: var(--bg-2);
+}
+
+/* AI section intro band */
+.ai-intro-band {
+  max-width: 860px; margin: 0 auto; padding: 56px 32px 0;
+}
+.ai-intro-band .ai-eyebrow {
+  font-size: 10px; letter-spacing: .38em; text-transform: uppercase;
+  color: var(--amber); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.ai-intro-band .ai-eyebrow::before { content: ""; display: block; width: 40px; height: 1px; background: var(--amber); }
+.ai-intro-band h2 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 5vw, 58px);
+  line-height: .96; letter-spacing: -.02em; margin-bottom: 16px;
+}
+.ai-intro-band h2 em { font-style: italic; color: var(--amber); }
+.ai-intro-band p { font-size: 15px; line-height: 1.6; color: var(--ink-dim); max-width: 60ch; }
+
+/* AI section wrap */
+.ai-wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 32px 32px 100px; }
+
+/* Flow indicator */
+.ai-flow { display: flex; align-items: center; gap: 0; margin-bottom: 44px; }
+.ai-fd {
+  width: 34px; height: 34px; border-radius: 50%; flex: 0 0 34px;
+  border: 1px solid var(--rule-strong); display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--ink-dim); transition: all .4s ease; background: var(--bg-2); position: relative;
+}
+.ai-fd.act { border-color: var(--amber); color: var(--amber); box-shadow: 0 0 20px -4px rgba(240,192,116,.5); background: var(--amber-dim); }
+.ai-fd.done { border-color: var(--amber); background: var(--amber); color: #1a1305; font-weight: 700; font-size: 13px; }
+.ai-fd.done .ai-fn { display: none; } .ai-fd.done::after { content: "✓"; }
+.ai-fl { flex: 1; height: 1px; background: var(--rule); transition: background .4s; }
+.ai-fl.done { background: var(--amber); }
+.ai-fd .ai-flbl {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; transition: color .3s;
+}
+.ai-fd.act .ai-flbl, .ai-fd.done .ai-flbl { color: var(--amber); }
+
+/* Panels */
+.ai-panel { display: none; animation: fadeUp .4s ease; }
+.ai-panel.act { display: block; }
+
+/* Upload zone */
+.ai-upload-zone {
+  border: 1px dashed var(--rule-strong); border-radius: 8px; padding: 56px 32px; text-align: center;
+  cursor: pointer; transition: all .3s; background: rgba(11,16,32,.5); position: relative; overflow: hidden;
+}
+.ai-upload-zone:hover, .ai-upload-zone.drag { border-color: var(--amber); background: var(--amber-dim); }
+.ai-upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.ai-upload-icon { font-size: 48px; margin-bottom: 16px; opacity: .7; }
+.ai-upload-zone h3 { font-family: var(--serif); font-weight: 300; font-size: 28px; margin-bottom: 8px; }
+.ai-upload-zone h3 em { font-style: italic; color: var(--amber); }
+.ai-upload-zone p { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+.ai-upload-zone .ai-fmt { margin-top: 14px; font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* Scene / preview */
+.ai-scene {
+  position: relative; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--rule); background: #000; margin-bottom: 16px;
+}
+.ai-scene img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; position: relative; z-index: 1; }
+.ai-night { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: rgba(2,4,10,.7); transition: opacity 1s ease; }
+.ai-lsvg { position: absolute; inset: 0; z-index: 3; pointer-events: none; width: 100%; height: 100%; }
+.ai-scene-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  background: linear-gradient(to top, rgba(7,11,22,.95) 0%, transparent 100%);
+}
+.ai-tog {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-dim);
+  border: 1px solid var(--rule); background: rgba(7,11,22,.55); backdrop-filter: blur(8px); cursor: pointer; transition: all .2s;
+}
+.ai-tog .ai-led { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-faint); transition: all .25s; flex: 0 0 7px; }
+.ai-tog.on { color: var(--amber); border-color: var(--amber); background: var(--amber-dim); }
+.ai-tog.on .ai-led { background: var(--amber); box-shadow: 0 0 8px var(--amber-glow); }
+.ai-intens { display: flex; align-items: center; gap: 8px; }
+.ai-intens label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); white-space: nowrap; }
+input[type=range].ai-isl {
+  -webkit-appearance: none; appearance: none; width: 80px; height: 2px;
+  background: var(--rule-strong); border-radius: 999px; outline: none; cursor: pointer;
+}
+input[type=range].ai-isl::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%;
+  background: var(--amber); border: 2px solid var(--bg); box-shadow: 0 0 10px rgba(240,192,116,.5);
+}
+
+/* Analyzing overlay */
+.ai-analyzing {
+  position: absolute; inset: 0; z-index: 20; background: rgba(7,11,22,.9); backdrop-filter: blur(4px);
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+}
+.ai-analyzing.show { display: flex; }
+.ai-spin { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--rule); border-top-color: var(--amber); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.ai-analyzing .ai-al { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--amber); }
+.ai-analyzing p { font-size: 12px; color: var(--ink-dim); letter-spacing: .08em; }
+
+/* Confirm rows */
+.ai-confirm-intro { margin-bottom: 28px; }
+.ai-confirm-intro h2 { font-family: var(--serif); font-weight: 300; font-size: 36px; line-height: 1.05; margin-bottom: 6px; }
+.ai-confirm-intro h2 em { font-style: italic; color: var(--amber); }
+.ai-confirm-intro p { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px;
+  font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
+  border: 1px solid rgba(240,192,116,.35); color: var(--amber); background: var(--amber-dim); margin-bottom: 24px;
+}
+.ai-badge .ai-blink { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber-glow); animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+
+.ai-crow {
+  display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 16px;
+  padding: 16px 18px; border: 1px solid var(--rule); border-radius: 6px;
+  background: rgba(11,16,32,.7); margin-bottom: 10px; transition: border-color .25s;
+}
+.ai-crow.confirmed { border-color: rgba(76,186,125,.4); background: rgba(76,186,125,.04); }
+.ai-crow.edited { border-color: rgba(240,192,116,.4); background: var(--amber-dim); }
+.ai-crow-key { font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 5px; }
+.ai-crow-val { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.1; color: var(--ink); }
+.ai-crow-val.gold { color: var(--amber); }
+.ai-crow-why { font-size: 11px; color: var(--ink-dim); margin-top: 4px; line-height: 1.4; font-style: italic; }
+.ai-crow-right { display: flex; gap: 6px; align-items: flex-start; padding-top: 2px; flex-wrap: wrap; justify-content: flex-end; }
+
+.cta-yes, .cta-edit {
+  display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 999px;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;
+  border: 1px solid; transition: all .2s; font-family: var(--sans); font-weight: 600; background: transparent;
+}
+.cta-yes { border-color: rgba(76,186,125,.4); color: #4cba7d; }
+.cta-yes:hover, .ai-crow.confirmed .cta-yes { background: rgba(76,186,125,.12); border-color: #4cba7d; }
+.cta-edit { border-color: var(--rule); color: var(--ink-dim); }
+.cta-edit:hover { border-color: var(--amber); color: var(--amber); }
+
+.ai-inline-edit { display: none; margin-top: 10px; grid-column: span 2; }
+.ai-inline-edit.show { display: block; }
+.ai-ie-opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.ai-ie-opt {
+  padding: 7px 14px; border-radius: 999px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--rule); color: var(--ink-dim); cursor: pointer; transition: all .2s; background: transparent;
+}
+.ai-ie-opt:hover { border-color: var(--rule-strong); color: var(--ink); }
+.ai-ie-opt.sel { border-color: var(--amber); color: var(--amber); background: var(--amber-dim); }
+.ai-multi-hint { font-size: 10px; color: var(--ink-faint); margin-top: 6px; letter-spacing: .1em; }
+
+/* Contact fields */
+.ai-contact-block { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.ai-field { border-bottom: 1px solid var(--rule-strong); padding: 12px 0; }
+.ai-field label { display: block; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
+.ai-field input, .ai-field select, .ai-field textarea {
+  width: 100%; background: transparent; border: 0; color: var(--ink); font: inherit; font-size: 15px; outline: none;
+}
+.ai-field input:focus, .ai-field select:focus { color: var(--amber); }
+.ai-field select option { background: var(--bg-2); color: var(--ink); }
+.ai-field.full { grid-column: span 2; }
+
+/* Quote card (AI) */
+.ai-qcard { border: 1px solid var(--rule); border-radius: 8px; background: rgba(11,16,32,.85); overflow: hidden; margin-bottom: 24px; }
+.ai-qcard-head {
+  padding: 32px 34px; border-bottom: 1px solid var(--rule);
+  background: linear-gradient(135deg, rgba(240,192,116,.1) 0%, transparent 60%);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.ai-qcard-head h2 { font-family: var(--serif); font-weight: 300; font-size: 38px; line-height: 1; }
+.ai-qcard-head h2 em { font-style: italic; color: var(--amber); }
+.ai-price-range .ai-qlabel { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 4px; }
+.ai-price-range .ai-qprice { font-family: var(--serif); font-size: 48px; font-weight: 300; color: var(--amber); line-height: 1; }
+.ai-price-range .ai-qsub { font-size: 11px; color: var(--ink-dim); margin-top: 3px; }
+.ai-qcard-body { padding: 26px 34px; }
+.ai-qline { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.ai-qline:last-child { border-bottom: 0; }
+.ai-qline .ai-qn { color: var(--ink-dim); }
+.ai-qline .ai-qv { font-family: var(--serif); font-size: 18px; font-weight: 400; }
+.ai-qline .ai-qv.hi { color: var(--amber); }
+.ai-qdots { flex: 1; border-bottom: 1px dotted var(--rule); margin: 0 8px; position: relative; top: -4px; }
+.ai-scope-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0; }
+.ai-scope-chip { padding: 6px 14px; border-radius: 999px; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; border: 1px solid rgba(240,192,116,.3); color: var(--amber); background: var(--amber-dim); }
+.ai-code-box { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--amber-dim); border: 1px solid var(--amber); border-radius: 6px; margin: 20px 0; flex-wrap: wrap; }
+.ai-code-box .ai-the-code { font-family: "Courier New", monospace; font-size: 22px; letter-spacing: .18em; color: var(--amber); font-weight: 700; }
+.ai-code-box .ai-cnote { font-size: 11px; color: var(--ink-dim); line-height: 1.4; }
+.ai-disc { font-size: 11px; color: var(--ink-faint); line-height: 1.55; border-top: 1px solid var(--rule); padding-top: 14px; margin-top: 4px; }
+.ai-qcta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+/* Sec label */
+.ai-sec {
+  font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: var(--amber);
+  display: flex; align-items: center; gap: 14px; margin-bottom: 18px; margin-top: 28px;
+}
+.ai-sec::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.ai-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule); }
+
+@media (max-width: 640px) {
+  .ai-wrap { padding: 0 18px 60px; }
+  .ai-crow { grid-template-columns: 1fr; }
+  .ai-qcard-head { flex-direction: column; align-items: flex-start; }
+  .ai-price-range .ai-qprice { font-size: 38px; }
+  .ai-contact-block { grid-template-columns: 1fr; }
+  .ai-field.full { grid-column: span 1; }
+  .or-divider, .ai-intro-band { padding: 0 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <a href="Home.html" class="brand">
+    <h1>Music City <em>Outdoor Lighting</em></h1>
+    <span class="tag">Quote Estimator</span>
+  </a>
+  <nav class="nav">
+    <a href="Home.html">Home</a>
+    <a href="Home.html#services">Services</a>
+    <a href="about.html">About</a>
+    <a href="Portfolio.html">Portfolio</a>
+    <a href="estimator.html" class="on">Estimator</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="eyebrow">Outdoor Lighting · Free Estimate</div>
+    <h2>Your after-dark quote,<br><em>built in 90 seconds.</em></h2>
+    <p>Answer five quick questions about your property and goals. We'll generate a scoped estimate and a unique code you can bring to your consultation.</p>
+  </div>
+
+  <!-- PROGRESS RAIL -->
+  <div class="progress-rail" id="rail">
+    <div class="p-step">
+      <div class="p-dot active" id="dot-1"><span class="pn">1</span><span class="p-label">Property</span></div>
+      <div class="p-line" id="line-1"></div>
+    </div>
+    <div class="p-step">
+      <div class="p-dot" id="dot-2"><span class="pn">2</span><span class="p-label">Size</span></div>
+      <div class="p-line" id="line-2"></div>
+    </div>
+    <div class="p-step">
+      <div class="p-dot" id="dot-3"><span class="pn">3</span><span class="p-label">Services</span></div>
+      <div class="p-line" id="line-3"></div>
+    </div>
+    <div class="p-step">
+      <div class="p-dot" id="dot-4"><span class="pn">4</span><span class="p-label">Goals</span></div>
+      <div class="p-line" id="line-4"></div>
+    </div>
+    <div class="p-step">
+      <div class="p-dot" id="dot-5"><span class="pn">5</span><span class="p-label">You</span></div>
+      <div class="p-line" id="line-5" style="background:transparent"></div>
+    </div>
+    <div class="p-dot" id="dot-6"><span class="pn">★</span><span class="p-label">Quote</span></div>
+  </div>
+
+  <!-- ══ STEP 1: PROPERTY TYPE ══ -->
+  <div class="step active" id="step-1">
+    <div class="step-title">What type of <em>property?</em></div>
+    <div class="step-sub">This shapes what fixture types we recommend and how we zone the design.</div>
+    <div class="opt-grid">
+      <div class="opt" data-step="1" data-val="residential-single">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 4l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9,21 9,13 15,13 15,21"/></svg></div>
+        <div class="opt-name">Single Family</div>
+        <div class="opt-desc">Detached home, suburban or rural lot</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="1" data-val="residential-estate">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="6" y1="17" x2="6" y2="10"/><line x1="10" y1="17" x2="10" y2="10"/><line x1="14" y1="17" x2="14" y2="10"/><line x1="18" y1="17" x2="18" y2="10"/><polygon points="12,3 20,8 4,8"/></svg></div>
+        <div class="opt-name">Estate / Acreage</div>
+        <div class="opt-desc">1+ acre, multiple zones, gated entry</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="1" data-val="townhome">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 21V11L7 5l6 6v10"/><path d="M11 21v-8h4v8"/><path d="M11 13l5-8 7 8v8H11"/></svg></div>
+        <div class="opt-name">Townhome</div>
+        <div class="opt-desc">Shared walls, smaller footprint</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="1" data-val="commercial">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22V14h6v8"/><rect x="8" y="6" width="3" height="3" rx=".5"/><rect x="13" y="6" width="3" height="3" rx=".5"/><rect x="8" y="12" width="3" height="3" rx=".5"/><rect x="13" y="12" width="3" height="3" rx=".5"/></svg></div>
+        <div class="opt-name">Commercial</div>
+        <div class="opt-desc">Office, retail, hospitality property</div>
+        <div class="chk"></div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <span></span>
+      <button class="btn btn-amber" onclick="next(1)">Continue <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: SIZE ══ -->
+  <div class="step" id="step-2">
+    <div class="step-title">How large is the <em>space?</em></div>
+    <div class="step-sub">Lot size and home frontage both affect fixture count and wire runs — the two biggest cost drivers.</div>
+
+    <div class="field-row" style="margin-bottom:36px">
+      <label>Approximate Lot Size</label>
+      <div class="slider-wrap">
+        <div class="slider-labels">
+          <span>Lot size</span>
+          <span class="cur" id="lotLabel">¼ acre</span>
+        </div>
+        <input type="range" id="lotSlider" min="0" max="5" step="1" value="1">
+        <div class="slider-ticks">
+          <span>&lt;0.1ac</span>
+          <span>¼ ac</span>
+          <span>½ ac</span>
+          <span>1 ac</span>
+          <span>2 ac</span>
+          <span>5+ ac</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row" style="margin-bottom:36px">
+      <label>Home Frontage / Facade Width</label>
+      <div class="slider-wrap">
+        <div class="slider-labels">
+          <span>Frontage</span>
+          <span class="cur" id="frontLabel">60 ft</span>
+        </div>
+        <input type="range" id="frontSlider" min="0" max="5" step="1" value="2">
+        <div class="slider-ticks">
+          <span>&lt;30ft</span>
+          <span>40ft</span>
+          <span>60ft</span>
+          <span>80ft</span>
+          <span>120ft</span>
+          <span>200ft+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><strong>Why this matters:</strong> A 60-ft frontage typically needs 6–10 uplights; a 120-ft frontage needs 12–18. Longer wire runs on bigger lots also add labor and low-voltage wiring costs.</div>
+
+    <div class="nav-btns">
+      <button class="btn btn-text" onclick="back(2)">← Back</button>
+      <button class="btn btn-amber" onclick="next(2)">Continue <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: SERVICES ══ -->
+  <div class="step" id="step-3">
+    <div class="step-title">Which lighting <em>services?</em></div>
+    <div class="step-sub">Select all that interest you — you don't have to commit. This helps us scope the fixture budget. Most homes combine 2–4 service types.</div>
+    <div class="tag-wrap" id="serviceTags">
+      <button class="tag sel" data-svc="landscape"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 22.4"/><path d="M20.5 3C20.5 3 13 6 11 12c0 0-3.5 1.5-5-1 0 0 3.5-8.5 9.5-9 0 0 2 2 5-2z"/></svg> Landscape</button>
+      <button class="tag sel" data-svc="architectural"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="6" y1="17" x2="6" y2="10"/><line x1="10" y1="17" x2="10" y2="10"/><line x1="14" y1="17" x2="14" y2="10"/><line x1="18" y1="17" x2="18" y2="10"/><polygon points="12,3 20,8 4,8"/></svg> Architectural Façade</button>
+      <button class="tag" data-svc="pool"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg> Pool &amp; Water</button>
+      <button class="tag" data-svc="path"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="2"/><path d="M9 5h6v6H9z"/><line x1="9" y1="8" x2="15" y2="8"/></svg> Path &amp; Driveway</button>
+      <button class="tag" data-svc="bistro"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Bistro / String</button>
+      <button class="tag" data-svc="holiday"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2L8 6m4-4l4 4M12 22l-4-4m4 4l4-4M2 12l4-4m-4 4l4 4M22 12l-4-4m4 4l-4 4"/></svg> Holiday / Seasonal</button>
+      <button class="tag" data-svc="audio"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/><path d="M19.07 4.93a10 10 0 010 14.14"/></svg> Outdoor Audio</button>
+      <button class="tag" data-svc="security"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Security Zones</button>
+    </div>
+
+    <div class="note"><strong>Not sure?</strong> Leave defaults selected — Landscape + Architectural is where 80% of our clients start. You'll refine this during your free design consultation.</div>
+
+    <div class="nav-btns">
+      <button class="btn btn-text" onclick="back(3)">← Back</button>
+      <button class="btn btn-amber" onclick="next(3)">Continue <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: GOALS / PRIORITY ══ -->
+  <div class="step" id="step-4">
+    <div class="step-title">What matters <em>most?</em></div>
+    <div class="step-sub">Pick your primary goal — this steers fixture selection, color temperature, and design direction.</div>
+    <div class="opt-grid two">
+      <div class="opt sel" data-step="4" data-val="curb-appeal">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="opt-name">Curb Appeal</div>
+        <div class="opt-desc">Dramatic façade and landscape — turn heads from the street</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="4" data-val="entertaining">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8m-4 0V14m0 0a6 6 0 006-6V3H6v5a6 6 0 006 6z"/></svg></div>
+        <div class="opt-name">Outdoor Living</div>
+        <div class="opt-desc">Patio ambiance, pool glow, bistro warmth — made for guests</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="4" data-val="security">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="opt-name">Security &amp; Safety</div>
+        <div class="opt-desc">Motion-zoned perimeter, dark spots eliminated, motion alerts</div>
+        <div class="chk"></div>
+      </div>
+      <div class="opt" data-step="4" data-val="full">
+        <div class="opt-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+        <div class="opt-name">Full Transformation</div>
+        <div class="opt-desc">All of the above — designed as a cohesive whole</div>
+        <div class="chk"></div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <label>Timeline</label>
+      <select id="timeline">
+        <option value="asap">ASAP — ready to book</option>
+        <option value="1mo">Within a month</option>
+        <option value="3mo" selected>1–3 months</option>
+        <option value="planning">Just planning / getting prices</option>
+      </select>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn btn-text" onclick="back(4)">← Back</button>
+      <button class="btn btn-amber" onclick="next(4)">Continue <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5: CONTACT ══ -->
+  <div class="step" id="step-5">
+    <div class="step-title">Almost there — <em>who are we talking to?</em></div>
+    <div class="step-sub">Your quote code is generated right now. Add your info to have it emailed to you, and to let us pull up your project in 10 seconds when you call.</div>
+    <div class="field-grid">
+      <div class="field-row"><label>First Name</label><input type="text" id="fname" placeholder="Jane"></div>
+      <div class="field-row"><label>Last Name</label><input type="text" id="lname" placeholder="Doe"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-row"><label>Phone</label><input type="tel" id="phone" placeholder="615-000-0000"></div>
+      <div class="field-row"><label>Email</label><input type="email" id="email" placeholder="jane@example.com"></div>
+    </div>
+    <div class="field-row"><label>Property Zip Code</label><input type="text" id="zip" placeholder="37067 (optional)"></div>
+    <div class="field-row">
+      <label>Anything specific in mind?</label>
+      <textarea id="notes" placeholder="Trees to spot, a pool you want lit, a problem dark zone… whatever's on your mind." style="min-height:72px"></textarea>
+    </div>
+    <div class="note">Your information is never sold or shared. It's used only to follow up on your quote.</div>
+    <div class="nav-btns">
+      <button class="btn btn-text" onclick="back(5)">← Back</button>
+      <button class="btn btn-amber" onclick="generateQuote()">Generate My Quote →</button>
+    </div>
+  </div>
+
+  <!-- ══ QUOTE RESULT ══ -->
+  <div class="step" id="step-6">
+    <div class="step-title">Your <em>lighting estimate.</em></div>
+    <div class="step-sub">Based on your selections — this is a planning range, not a contract. A site visit refines it to the dollar.</div>
+
+    <div class="quote-card">
+      <div class="quote-header">
+        <div>
+          <h2 id="q-greeting">Your <em>custom</em> scope</h2>
+          <div style="margin-top:10px;font-size:13px;color:var(--ink-dim)" id="q-subtitle"></div>
+        </div>
+        <div class="quote-range">
+          <div class="label">Estimated Investment</div>
+          <div class="price" id="q-price">—</div>
+          <div class="price-sub">installed · fixtures + labor + controls</div>
+        </div>
+      </div>
+
+      <div class="quote-body">
+        <div style="margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:14px">Your Project Scope</div>
+          <div class="scope-grid" id="q-scope"></div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:14px">Recommended Fixture Mix</div>
+          <div class="fixtures-list" id="q-fixtures"></div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="quote-line">
+            <span class="qn">Fixture &amp; Materials</span>
+            <span class="dot-line"></span>
+            <span class="qv" id="q-materials">—</span>
+          </div>
+          <div class="quote-line">
+            <span class="qn">Labor &amp; Installation</span>
+            <span class="dot-line"></span>
+            <span class="qv" id="q-labor">—</span>
+          </div>
+          <div class="quote-line">
+            <span class="qn">Smart Controls / Timer</span>
+            <span class="dot-line"></span>
+            <span class="qv" id="q-controls">—</span>
+          </div>
+          <div class="quote-line" style="margin-top:8px;padding-top:16px;border-top:1px solid var(--rule-strong)">
+            <span class="qn" style="font-size:15px;color:var(--ink)">Estimated Total</span>
+            <span class="dot-line"></span>
+            <span class="qv hi" style="font-size:24px" id="q-total">—</span>
+          </div>
+        </div>
+        <div class="disclaimer" id="q-disclaimer"></div>
+      </div>
+    </div>
+
+    <!-- QUOTE CODE -->
+    <div class="code-block">
+      <div>
+        <div class="code-note" style="margin-bottom:6px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)">Your Quote Reference Code</div>
+        <div class="the-code" id="q-code">—</div>
+        <div class="code-note" style="margin-top:4px">Mention this when you call or book — we'll pull your scope instantly.</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode()">Copy</button>
+    </div>
+
+    <div class="cta-strip">
+      <button class="btn btn-amber" onclick="window.location='tel:6159051905'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call to Book Free Consult
+      </button>
+      <button class="btn btn-ghost" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print / Save Quote
+      </button>
+      <button class="btn btn-text" onclick="restart()">Start Over</button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- ══════════════════════════════════════════
+     OR DIVIDER
+══════════════════════════════════════════ -->
+<div class="or-divider" style="margin-top:80px">
+  <div class="or-divider-line"></div>
+  <div class="or-divider-pill">Or try the AI approach</div>
+  <div class="or-divider-line"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     AI PHOTO ESTIMATOR — INTRO BAND
+══════════════════════════════════════════ -->
+<div class="ai-intro-band">
+  <div class="ai-eyebrow">AI-Powered · Photo Estimator</div>
+  <h2>Not sure what you want?<br>Upload your home — <em>we'll suggest it.</em></h2>
+  <p>Drop a photo of your exterior. Our AI reads the architecture, detects the best lighting zones, and builds a custom scope for you to review and confirm — then generates your estimate instantly.</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     AI PHOTO ESTIMATOR — TOOL
+══════════════════════════════════════════ -->
+<div class="ai-wrap">
+
+  <!-- Flow indicator -->
+  <div class="ai-flow">
+    <div class="ai-fd act" id="ai-fd1"><span class="ai-fn">1</span><span class="ai-flbl">Photo</span></div>
+    <div class="ai-fl" id="ai-fl1"></div>
+    <div class="ai-fd" id="ai-fd2"><span class="ai-fn">2</span><span class="ai-flbl">Confirm</span></div>
+    <div class="ai-fl" id="ai-fl2"></div>
+    <div class="ai-fd" id="ai-fd3"><span class="ai-fn">3</span><span class="ai-flbl">Details</span></div>
+    <div class="ai-fl" id="ai-fl3"></div>
+    <div class="ai-fd" id="ai-fd4"><span class="ai-fn">★</span><span class="ai-flbl">Quote</span></div>
+  </div>
+
+  <!-- ── PANEL 1: UPLOAD + VISUALIZE ── -->
+  <div class="ai-panel act" id="ai-p1">
+    <div class="ai-upload-zone" id="aiUploadZone">
+      <input type="file" id="aiFileInput" accept="image/*">
+      <div class="ai-upload-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber)"><path d="M3 10.5L12 4l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9,21 9,13 15,13 15,21"/></svg></div>
+      <h3>Drop your house photo here,<br>or <em>click to browse.</em></h3>
+      <p>Front-facing exterior shot works best. Day or night — we'll simulate the lighting.</p>
+      <div class="ai-fmt">JPG · PNG · WEBP · HEIC</div>
+    </div>
+
+    <div class="ai-scene" id="aiScene" style="display:none">
+      <img id="aiHouseImg" src="" alt="Your home">
+      <div class="ai-night" id="aiNightOverlay"></div>
+      <svg class="ai-lsvg" id="aiLightSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      <div class="ai-scene-bar">
+        <div style="display:flex;gap:6px;flex-wrap:wrap" id="aiTogGroup"></div>
+        <div class="ai-intens">
+          <label>Intensity</label>
+          <input type="range" class="ai-isl" id="aiISlider" min="0.2" max="1" step="0.05" value="0.8">
+        </div>
+      </div>
+      <div class="ai-analyzing" id="aiAnalyzing">
+        <div class="ai-spin"></div>
+        <div class="ai-al">Reading your home…</div>
+        <p id="aiAStatus">Identifying architectural features</p>
+      </div>
+    </div>
+
+    <div id="ai-p1-next" style="display:none;margin-top:16px">
+      <div class="note"><strong>Looking good.</strong> Your home has been analyzed. Next we'll confirm what the AI detected before generating your quote.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-amber" onclick="aiGoTo(2)">Confirm &amp; Get Estimate →</button>
+        <button class="btn btn-ghost" onclick="aiReset()">← Try Different Photo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 2: CONFIRM EXTRACTED DATA ── -->
+  <div class="ai-panel" id="ai-p2">
+    <div class="ai-confirm-intro">
+      <div class="ai-badge"><span class="ai-blink"></span>AI-Extracted from your photo</div>
+      <h2>Does this match <em>your home?</em></h2>
+      <p>We detected the following from your photo. Confirm what's right, edit anything that's off — this directly shapes your estimate.</p>
+    </div>
+    <div id="aiConfirmRows"></div>
+    <div class="ai-nav-row">
+      <button class="btn btn-text" onclick="aiGoTo(1)">← Back</button>
+      <button class="btn btn-amber" onclick="aiGoTo(3)">Looks Right — Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL 3: CONTACT + GOAL ── -->
+  <div class="ai-panel" id="ai-p3">
+    <div style="font-family:var(--serif);font-weight:300;font-size:32px;line-height:1.05;margin-bottom:6px">One last thing — <em>tell us about you.</em></div>
+    <p style="font-size:14px;color:var(--ink-dim);margin-bottom:28px;line-height:1.5">Your quote code is generated instantly. Add contact info so we can send it to you and pull up your project when you call.</p>
+
+    <div class="ai-sec">Your Goal</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px" id="aiGoalGrid">
+      <div class="ai-crow" style="cursor:pointer" data-goal="curb-appeal" onclick="aiSetGoal(this)">
+        <div><div class="ai-crow-key">Goal</div><div class="ai-crow-val"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--amber);vertical-align:middle;margin-right:6px"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/><circle cx="12" cy="12" r="4"/></svg>Curb Appeal</div><div class="ai-crow-why">Dramatic façade, turn heads from the street</div></div>
+      </div>
+      <div class="ai-crow" style="cursor:pointer" data-goal="entertaining" onclick="aiSetGoal(this)">
+        <div><div class="ai-crow-key">Goal</div><div class="ai-crow-val"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);vertical-align:middle;margin-right:6px"><path d="M8 22h8m-4 0V14m0 0a6 6 0 006-6V3H6v5a6 6 0 006 6z"/></svg>Outdoor Living</div><div class="ai-crow-why">Patio ambiance, pool glow, made for guests</div></div>
+      </div>
+      <div class="ai-crow" style="cursor:pointer" data-goal="security" onclick="aiSetGoal(this)">
+        <div><div class="ai-crow-key">Goal</div><div class="ai-crow-val"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);vertical-align:middle;margin-right:6px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security</div><div class="ai-crow-why">Dark zones eliminated, motion zones set</div></div>
+      </div>
+      <div class="ai-crow" style="cursor:pointer" data-goal="full" onclick="aiSetGoal(this)">
+        <div><div class="ai-crow-key">Goal</div><div class="ai-crow-val"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);vertical-align:middle;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Full Design</div><div class="ai-crow-why">Everything — designed as a cohesive whole</div></div>
+      </div>
+    </div>
+
+    <div class="ai-sec">Contact</div>
+    <div class="ai-contact-block">
+      <div class="ai-field"><label>First Name</label><input id="ai-fname" type="text" placeholder="Jane"></div>
+      <div class="ai-field"><label>Last Name</label><input id="ai-lname" type="text" placeholder="Doe"></div>
+      <div class="ai-field"><label>Phone</label><input id="ai-phone" type="tel" placeholder="615-000-0000"></div>
+      <div class="ai-field"><label>Email</label><input id="ai-email" type="email" placeholder="jane@home.com"></div>
+      <div class="ai-field"><label>Timeline</label>
+        <select id="ai-timeline">
+          <option value="asap">ASAP — ready to book</option>
+          <option value="1mo">Within a month</option>
+          <option value="3mo" selected>1–3 months</option>
+          <option value="planning">Just planning / getting prices</option>
+        </select>
+      </div>
+      <div class="ai-field"><label>Zip Code (optional)</label><input id="ai-zip" type="text" placeholder="37067"></div>
+      <div class="ai-field full"><label>Anything specific in mind?</label>
+        <textarea id="ai-notes" placeholder="A tree you want spotlit, a dark zone that bothers you…" style="min-height:60px;resize:vertical"></textarea>
+      </div>
+    </div>
+
+    <div class="ai-nav-row">
+      <button class="btn btn-text" onclick="aiGoTo(2)">← Back</button>
+      <button class="btn btn-amber" onclick="aiBuildQuote()">Generate My Quote →</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL 4: QUOTE ── -->
+  <div class="ai-panel" id="ai-p4">
+    <div class="ai-sec">Your Estimate</div>
+    <div class="ai-qcard">
+      <div class="ai-qcard-head">
+        <div>
+          <h2 id="ai-q-name">Your <em>custom scope</em></h2>
+          <div id="ai-q-sub" style="margin-top:8px;font-size:13px;color:var(--ink-dim)"></div>
+          <div class="ai-scope-chips" id="ai-q-chips"></div>
+        </div>
+        <div class="ai-price-range">
+          <div class="ai-qlabel">Estimated Investment</div>
+          <div class="ai-qprice" id="ai-q-price">—</div>
+          <div class="ai-qsub">installed · fixtures + labor + smart controls</div>
+        </div>
+      </div>
+      <div class="ai-qcard-body">
+        <div class="ai-qline"><span class="ai-qn">Fixtures &amp; Materials</span><span class="ai-qdots"></span><span class="ai-qv" id="ai-q-mat">—</span></div>
+        <div class="ai-qline"><span class="ai-qn">Labor &amp; Installation</span><span class="ai-qdots"></span><span class="ai-qv" id="ai-q-lab">—</span></div>
+        <div class="ai-qline"><span class="ai-qn">Smart Controls / Timer</span><span class="ai-qdots"></span><span class="ai-qv" id="ai-q-ctrl">—</span></div>
+        <div class="ai-qline" style="margin-top:8px;padding-top:16px;border-top:1px solid var(--rule-strong)">
+          <span class="ai-qn" style="font-size:15px;color:var(--ink)">Estimated Total</span>
+          <span class="ai-qdots"></span>
+          <span class="ai-qv hi" style="font-size:24px" id="ai-q-total">—</span>
+        </div>
+        <div class="ai-disc" id="ai-q-disc"></div>
+      </div>
+    </div>
+    <div class="ai-code-box">
+      <div>
+        <div style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);margin-bottom:5px">Your Quote Reference Code</div>
+        <div class="ai-the-code" id="ai-q-code">—</div>
+        <div class="ai-cnote" style="margin-top:3px">Mention this when you call — we'll pull your scope instantly.</div>
+      </div>
+      <button class="btn btn-text" id="aiCopyBtn" onclick="aiCopyCode()">Copy</button>
+    </div>
+    <div class="ai-qcta">
+      <button class="btn btn-amber" onclick="window.location='tel:6159051905'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Book Free Consultation</button>
+      <button class="btn btn-ghost" onclick="window.print()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print / Save</button>
+      <button class="btn btn-text" onclick="aiReset()">Start Over</button>
+    </div>
+  </div>
+
+</div><!-- /ai-wrap -->
+
+<script>
+const state = {
+  propertyType: null,
+  lotIdx: 1, frontIdx: 2,
+  services: ['landscape','architectural'],
+  goal: 'curb-appeal', timeline: '3mo',
+  name: '', phone: '', email: '', zip: '', notes: ''
+};
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  for (let i = 1; i <= 6; i++) {
+    const dot = document.getElementById('dot-' + i);
+    const line = document.getElementById('line-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','done');
+    if (i < n) dot.classList.add('done');
+    else if (i === n) dot.classList.add('active');
+    if (line) { if (i < n) line.classList.add('done'); else line.classList.remove('done'); }
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function next(from) {
+  if (from === 1 && !state.propertyType) { alert('Please select a property type to continue.'); return; }
+  showStep(from + 1);
+}
+function back(from) { showStep(from - 1); }
+
+document.querySelectorAll('.opt[data-step="1"]').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.opt[data-step="1"]').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.propertyType = opt.dataset.val;
+  });
+});
+
+const LOT_LABELS   = ['<0.1 ac','¼ acre','½ acre','1 acre','2 acres','5+ acres'];
+const FRONT_LABELS = ['<30 ft','40 ft','60 ft','80 ft','120 ft','200 ft+'];
+
+const lotSlider  = document.getElementById('lotSlider');
+const frontSlider = document.getElementById('frontSlider');
+const lotLabel   = document.getElementById('lotLabel');
+const frontLabel = document.getElementById('frontLabel');
+
+lotSlider.addEventListener('input', () => { state.lotIdx = +lotSlider.value; lotLabel.textContent = LOT_LABELS[state.lotIdx]; });
+frontSlider.addEventListener('input', () => { state.frontIdx = +frontSlider.value; frontLabel.textContent = FRONT_LABELS[state.frontIdx]; });
+
+document.querySelectorAll('.tag[data-svc]').forEach(tag => {
+  tag.addEventListener('click', () => {
+    tag.classList.toggle('sel');
+    const svc = tag.dataset.svc;
+    if (state.services.includes(svc)) state.services = state.services.filter(s => s !== svc);
+    else state.services.push(svc);
+  });
+});
+
+document.querySelectorAll('.opt[data-step="4"]').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.opt[data-step="4"]').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.goal = opt.dataset.val;
+  });
+});
+document.getElementById('timeline').addEventListener('change', e => { state.timeline = e.target.value; });
+
+function generateQuote() {
+  state.name  = (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim();
+  state.phone = document.getElementById('phone').value;
+  state.email = document.getElementById('email').value;
+  state.zip   = document.getElementById('zip').value;
+  state.notes = document.getElementById('notes').value;
+
+  const SVC_COST = {
+    landscape:    [1800, 4200], architectural: [1200, 3200],
+    pool:         [900,  2400], path:          [600,  1400],
+    bistro:       [500,  1200], holiday:       [700,  1800],
+    audio:        [1200, 3000], security:      [400,  1000],
+  };
+  const LOT_MULT   = [0.65, 0.85, 1.0, 1.35, 1.75, 2.4];
+  const FRONT_MULT = [0.6,  0.75, 1.0, 1.25, 1.6,  2.2];
+  const PROP_MULT  = { 'residential-single': 1.0, 'residential-estate': 1.55, 'townhome': 0.7, 'commercial': 1.85 };
+  const GOAL_MULT  = { 'curb-appeal': 1.0, 'entertaining': 1.1, 'security': 0.85, 'full': 1.3 };
+
+  const svcList  = state.services.length > 0 ? state.services : ['landscape'];
+  const sizeMult = LOT_MULT[state.lotIdx] * FRONT_MULT[state.frontIdx];
+  const propMult = PROP_MULT[state.propertyType] || 1.0;
+  const goalMult = GOAL_MULT[state.goal] || 1.0;
+
+  let matLow = 0, matHigh = 0;
+  svcList.forEach(s => {
+    const [lo, hi] = SVC_COST[s] || [500, 1200];
+    matLow += lo; matHigh += hi;
+  });
+  matLow  = Math.round(matLow  * sizeMult * propMult * goalMult / 100) * 100;
+  matHigh = Math.round(matHigh * sizeMult * propMult * goalMult / 100) * 100;
+
+  const laborLow  = Math.round(matLow  * 0.55 / 100) * 100;
+  const laborHigh = Math.round(matHigh * 0.55 / 100) * 100;
+  const controlsLow = 200, controlsHigh = 450;
+
+  const totalLow  = matLow  + laborLow  + controlsLow;
+  const totalHigh = matHigh + laborHigh + controlsHigh;
+
+  const FIXTURES = {
+    landscape:    { name: 'Uplights & Moonlights',   desc: 'Façade & tree canopy wash' },
+    architectural:{ name: 'Architectural Wash',       desc: 'Brick, stone & trim accents' },
+    pool:         { name: 'Pool & Water Lights',      desc: 'Submersible + coping accents' },
+    path:         { name: 'Path & Step Lights',       desc: 'Walkway & entry grade' },
+    bistro:       { name: 'Bistro String Lights',     desc: 'Patio & pergola drape' },
+    holiday:      { name: 'Holiday Wrap System',      desc: 'Seasonal eave & shrubbery' },
+    audio:        { name: 'Landscape Speakers',       desc: 'Buried sub + satellite pair' },
+    security:     { name: 'Security Zones',           desc: 'Motion-triggered perimeter' },
+  };
+
+  const ptCode  = { 'residential-single':'RS','residential-estate':'ES','townhome':'TH','commercial':'CM' }[state.propertyType] || 'XX';
+  const svcCode = svcList.map(s => s.slice(0,2).toUpperCase()).join('');
+  const rand    = Math.random().toString(36).slice(2,6).toUpperCase();
+  const code    = `OLP-${ptCode}-${svcCode}-${rand}`;
+
+  const greeting = state.name ? `${state.name.split(' ')[0]}'s <em>custom</em> scope` : 'Your <em>custom</em> scope';
+  document.getElementById('q-greeting').innerHTML = greeting;
+
+  const propLabel = { 'residential-single':'Single Family', 'residential-estate':'Estate', 'townhome':'Townhome', 'commercial':'Commercial' }[state.propertyType] || 'Property';
+  const goalLabel = { 'curb-appeal':'Curb Appeal', 'entertaining':'Outdoor Living', 'security':'Security Focus', 'full':'Full Transformation' }[state.goal];
+  document.getElementById('q-subtitle').textContent = `${propLabel} · ${LOT_LABELS[state.lotIdx]} lot · ${goalLabel} priority`;
+
+  document.getElementById('q-price').textContent = `$${totalLow.toLocaleString()} – $${totalHigh.toLocaleString()}`;
+
+  document.getElementById('q-scope').innerHTML = `
+    <div class="scope-item"><div class="si-label">Property Type</div><div class="si-val"><em>${propLabel}</em></div></div>
+    <div class="scope-item"><div class="si-label">Lot Size</div><div class="si-val"><em>${LOT_LABELS[state.lotIdx]}</em></div></div>
+    <div class="scope-item"><div class="si-label">Frontage</div><div class="si-val"><em>${FRONT_LABELS[state.frontIdx]}</em></div></div>
+    <div class="scope-item"><div class="si-label">Services</div><div class="si-val"><em>${svcList.length}</em> zones</div></div>
+    <div class="scope-item"><div class="si-label">Goal</div><div class="si-val"><em>${goalLabel}</em></div></div>
+    <div class="scope-item"><div class="si-label">Timeline</div><div class="si-val"><em>${{ asap:'ASAP', '1mo':'1 month', '3mo':'1–3 mo', planning:'Planning' }[state.timeline]}</em></div></div>
+  `;
+
+  document.getElementById('q-fixtures').innerHTML = svcList.map(s => {
+    const f = FIXTURES[s];
+    return `<div class="fix-row"><span class="led"></span><span class="fn">${f.name}</span><span class="fc">${f.desc}</span></div>`;
+  }).join('');
+
+  document.getElementById('q-materials').textContent = `$${matLow.toLocaleString()} – $${matHigh.toLocaleString()}`;
+  document.getElementById('q-labor').textContent     = `$${laborLow.toLocaleString()} – $${laborHigh.toLocaleString()}`;
+  document.getElementById('q-controls').textContent  = `$${controlsLow} – $${controlsHigh}`;
+  document.getElementById('q-total').textContent     = `$${totalLow.toLocaleString()} – $${totalHigh.toLocaleString()}`;
+  document.getElementById('q-disclaimer').textContent = `This estimate is generated from property profile data and typical project costs in the Middle Tennessee market. Actual pricing depends on a site visit, chosen fixture brand/grade, and any site conditions (slope, concrete cutting, etc.). A free design consultation will produce a firm line-item quote with no obligation.`;
+  document.getElementById('q-code').textContent = code;
+  window._quoteCode = code;
+
+  showStep(6);
+}
+
+function copyCode() {
+  if (navigator.clipboard && window._quoteCode) {
+    navigator.clipboard.writeText(window._quoteCode).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1800);
+    });
+  }
+}
+
+function restart() {
+  state.propertyType = null;
+  state.lotIdx = 1; state.frontIdx = 2;
+  state.services = ['landscape','architectural'];
+  state.goal = 'curb-appeal'; state.timeline = '3mo';
+  lotSlider.value = 1; lotLabel.textContent = LOT_LABELS[1];
+  frontSlider.value = 2; frontLabel.textContent = FRONT_LABELS[2];
+  document.querySelectorAll('.opt[data-step="1"]').forEach(o => o.classList.remove('sel'));
+  document.querySelectorAll('.opt[data-step="4"]').forEach(o => {
+    o.classList.toggle('sel', o.dataset.val === 'curb-appeal');
+  });
+  document.querySelectorAll('.tag[data-svc]').forEach(t => {
+    t.classList.toggle('sel', ['landscape','architectural'].includes(t.dataset.svc));
+  });
+  ['fname','lname','phone','email','zip','notes'].forEach(id => { document.getElementById(id).value = ''; });
+  showStep(1);
+}
+</script>
+
+<script>
+// ═══════════════════════════════════════════════
+// AI PHOTO ESTIMATOR
+// ═══════════════════════════════════════════════
+const aiS = {
+  propertyType: 'residential-single',
+  lotIdx: 1, frontIdx: 2,
+  services: ['landscape','architectural'],
+  stories: 2, hasPool: false, hasTrees: true,
+  goal: 'curb-appeal',
+  name: '', phone: '', email: '', zip: '', timeline: '3mo', notes: '',
+  aiData: null,
+};
+
+const AI_LOT_LABELS   = ['<0.1 ac','¼ acre','½ acre','1 acre','2 acres','5+ acres'];
+const AI_FRONT_LABELS = ['<30 ft','40 ft','60 ft','80 ft','120 ft','200 ft+'];
+const AI_LIGHT_TYPES  = {
+  uplight:   {label:'Uplights',    color:'#f5c96a'},
+  moonlight: {label:'Moonlight',   color:'#d4eaf5'},
+  path:      {label:'Path Lights', color:'#f5d88a'},
+  window:    {label:'Window Glow', color:'#f5c060'},
+  pool:      {label:'Pool',        color:'#60d4f5'},
+  tree:      {label:'Tree Spots',  color:'#a8e08a'},
+};
+const AI_PROP_LABELS = {
+  'residential-single':'Single Family Home',
+  'residential-estate':'Estate / Acreage',
+  'townhome':'Townhome / Attached',
+  'commercial':'Commercial Property',
+};
+const AI_SVC_ICONS = {
+  landscape:     '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><path d="M17 8C8 10 5.9 16.17 3.82 22.4"/><path d="M20.5 3C20.5 3 13 6 11 12c0 0-3.5 1.5-5-1 0 0 3.5-8.5 9.5-9 0 0 2 2 5-2z"/></svg>',
+  architectural: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><line x1="3" y1="21" x2="21" y2="21"/><line x1="6" y1="17" x2="6" y2="10"/><line x1="10" y1="17" x2="10" y2="10"/><line x1="14" y1="17" x2="14" y2="10"/><line x1="18" y1="17" x2="18" y2="10"/><polygon points="12,3 20,8 4,8"/></svg>',
+  pool:          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>',
+  path:          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><line x1="12" y1="22" x2="12" y2="2"/><path d="M9 5h6v6H9z"/><line x1="9" y1="8" x2="15" y2="8"/></svg>',
+  bistro:        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
+  security:      '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  tree:          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;color:var(--amber)"><path d="M12 22v-7"/><path d="M5 17l7-5 7 5"/><path d="M5 12l7-5 7 5"/><path d="M5 7l7-5 7 5"/></svg>',
+};
+const AI_SVC_META = {
+  landscape:     {emoji: AI_SVC_ICONS.landscape,     label:'Landscape Lighting'},
+  architectural: {emoji: AI_SVC_ICONS.architectural, label:'Architectural Façade'},
+  pool:          {emoji: AI_SVC_ICONS.pool,           label:'Pool & Water'},
+  path:          {emoji: AI_SVC_ICONS.path,           label:'Path & Driveway'},
+  bistro:        {emoji: AI_SVC_ICONS.bistro,         label:'Bistro / String Lights'},
+  security:      {emoji: AI_SVC_ICONS.security,       label:'Security Zones'},
+  tree:          {emoji: AI_SVC_ICONS.tree,           label:'Tree Spotlights'},
+};
+const AI_SVC_COST = {
+  landscape:[1800,4200], architectural:[1200,3200],
+  pool:[900,2400], path:[600,1400],
+  bistro:[500,1200], security:[400,1000], tree:[500,1400],
+};
+const AI_LOT_MULT   = [0.65,0.85,1.0,1.35,1.75,2.4];
+const AI_FRONT_MULT = [0.6,0.75,1.0,1.25,1.6,2.2];
+const AI_PROP_MULT  = {'residential-single':1.0,'residential-estate':1.55,'townhome':0.7,'commercial':1.85};
+const AI_GOAL_MULT  = {'curb-appeal':1.0,'entertaining':1.1,'security':0.85,'full':1.3};
+const AI_STORY_MULT = [0,0.9,1.0,1.2];
+
+let aiCurrentLights = {};
+let aiActiveTypes   = new Set();
+let aiGlobalIntensity = 0.8;
+let aiImageBase64   = null;
+let aiSIdx = 0, aiSInt = null;
+
+const AI_STATUS_MSGS = [
+  'Identifying architectural features…',
+  'Reading roofline and facade details…',
+  'Detecting trees and landscape zones…',
+  'Estimating property size from photo…',
+  'Building fixture placement plan…',
+  'Calculating your estimate…',
+];
+
+// ── FLOW ──
+function aiGoTo(n) {
+  document.querySelectorAll('.ai-panel').forEach(p => p.classList.remove('act'));
+  document.getElementById('ai-p' + n).classList.add('act');
+  for (let i = 1; i <= 4; i++) {
+    const d = document.getElementById('ai-fd' + i);
+    const l = document.getElementById('ai-fl' + i);
+    if (!d) continue;
+    d.classList.remove('act','done');
+    if (i < n) d.classList.add('done');
+    else if (i === n) d.classList.add('act');
+    if (l) l.classList.toggle('done', i < n);
+  }
+  document.getElementById('ai-p' + n).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── UPLOAD ──
+(function() {
+  const uz = document.getElementById('aiUploadZone');
+  const fi = document.getElementById('aiFileInput');
+  uz.addEventListener('dragover', e => { e.preventDefault(); uz.classList.add('drag'); });
+  uz.addEventListener('dragleave', () => uz.classList.remove('drag'));
+  uz.addEventListener('drop', e => {
+    e.preventDefault(); uz.classList.remove('drag');
+    const f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) aiHandleFile(f);
+  });
+  fi.addEventListener('change', () => { if (fi.files[0]) aiHandleFile(fi.files[0]); });
+})();
+
+function aiHandleFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    aiImageBase64 = e.target.result.split(',')[1];
+    const mt = file.type || 'image/jpeg';
+    const img = document.getElementById('aiHouseImg');
+    img.src = e.target.result;
+    img.onload = () => {
+      document.getElementById('aiUploadZone').style.display = 'none';
+      document.getElementById('aiScene').style.display = 'block';
+      aiShowAnalyzing(true);
+      aiAnalyzePhoto(aiImageBase64, mt);
+    };
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── ANALYZING OVERLAY ──
+function aiShowAnalyzing(show) {
+  const el = document.getElementById('aiAnalyzing');
+  el.classList.toggle('show', show);
+  if (show) {
+    aiSIdx = 0;
+    document.getElementById('aiAStatus').textContent = AI_STATUS_MSGS[0];
+    aiSInt = setInterval(() => {
+      aiSIdx = (aiSIdx + 1) % AI_STATUS_MSGS.length;
+      document.getElementById('aiAStatus').textContent = AI_STATUS_MSGS[aiSIdx];
+    }, 1600);
+  } else {
+    clearInterval(aiSInt);
+  }
+}
+
+// ── AI ANALYSIS ──
+async function aiAnalyzePhoto(b64, mt) {
+  const prompt = `You are an expert outdoor lighting designer AND property analyst. Analyze this home exterior photo carefully and return ONLY a raw JSON object (no markdown fences, no preamble) with this exact structure:
+
+{
+  "summary": "2-3 sentence poetic description of this specific home and its lighting potential",
+  "propertyType": "residential-single | residential-estate | townhome | commercial",
+  "propertyTypeReason": "one sentence",
+  "lotIdx": <0-5, where 0=<0.1ac 1=quarter 2=half 3=1ac 4=2ac 5=5+>,
+  "lotReason": "one sentence",
+  "frontIdx": <0-5, where 0=<30ft 1=40ft 2=60ft 3=80ft 4=120ft 5=200ft+>,
+  "frontReason": "one sentence",
+  "stories": <1, 2, or 3>,
+  "hasPool": <boolean>,
+  "hasTrees": <boolean>,
+  "services": ["keys from: landscape, architectural, pool, path, bistro, security, tree"],
+  "servicesReason": "one sentence",
+  "lights": [
+    { "type": "uplight|moonlight|path|window|pool|tree", "cx": <0-100>, "cy": <0-100>, "rx": <3-12>, "ry": <5-22>, "intensity": <0.5-1.0> }
+  ]
+}
+
+Place 10-20 light points matching actual visible features. cx/cy = percent of image (0,0=top-left). Be conservative.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1600,
+        messages: [{ role: 'user', content: [
+          { type: 'image', source: { type: 'base64', media_type: mt, data: b64 } },
+          { type: 'text', text: prompt }
+        ]}]
+      })
+    });
+    const data = await res.json();
+    const raw = data.content?.find(b => b.type === 'text')?.text || '';
+    const result = JSON.parse(raw.replace(/```json|```/gi, '').trim());
+    aiApplyData(result);
+  } catch(err) {
+    console.error(err);
+    aiApplyData(aiGetFallback());
+  }
+}
+
+function aiGetFallback() {
+  return {
+    summary: "This home has excellent outdoor lighting potential with a well-proportioned facade and natural landscape framing.",
+    propertyType: 'residential-single', propertyTypeReason: "Typical single-family detached residential home.",
+    lotIdx: 1, lotReason: "Standard suburban lot based on visible lawn and setback.",
+    frontIdx: 2, frontReason: "Facade appears approximately 60 feet wide.",
+    stories: 2, hasPool: false, hasTrees: true,
+    services: ['landscape','architectural','path'],
+    servicesReason: "Facade and trees visible; path approach present.",
+    lights: [
+      {type:'uplight',cx:20,cy:55,rx:5,ry:18,intensity:.85},
+      {type:'uplight',cx:50,cy:50,rx:6,ry:22,intensity:.9},
+      {type:'uplight',cx:80,cy:55,rx:5,ry:18,intensity:.85},
+      {type:'window', cx:30,cy:40,rx:4,ry:5, intensity:.7},
+      {type:'window', cx:70,cy:40,rx:4,ry:5, intensity:.7},
+      {type:'path',   cx:25,cy:78,rx:2,ry:2.5,intensity:.8},
+      {type:'path',   cx:50,cy:82,rx:2,ry:2.5,intensity:.8},
+      {type:'path',   cx:72,cy:78,rx:2,ry:2.5,intensity:.75},
+      {type:'tree',   cx:8, cy:48,rx:5,ry:14, intensity:.7},
+      {type:'tree',   cx:92,cy:48,rx:5,ry:14, intensity:.7},
+    ]
+  };
+}
+
+function aiApplyData(d) {
+  aiS.aiData       = d;
+  aiS.propertyType = d.propertyType || 'residential-single';
+  aiS.lotIdx       = d.lotIdx ?? 1;
+  aiS.frontIdx     = d.frontIdx ?? 2;
+  aiS.stories      = d.stories || 2;
+  aiS.hasPool      = d.hasPool || false;
+  aiS.hasTrees     = d.hasTrees !== false;
+  aiS.services     = d.services || ['landscape','architectural'];
+
+  aiCurrentLights = {};
+  (d.lights || []).forEach(l => {
+    if (!aiCurrentLights[l.type]) aiCurrentLights[l.type] = [];
+    aiCurrentLights[l.type].push(l);
+  });
+  aiActiveTypes = new Set(Object.keys(aiCurrentLights));
+
+  const tg = document.getElementById('aiTogGroup');
+  tg.innerHTML = '';
+  Object.keys(aiCurrentLights).forEach(type => {
+    const lt = AI_LIGHT_TYPES[type]; if (!lt) return;
+    const btn = document.createElement('button');
+    btn.className = 'ai-tog on'; btn.dataset.type = type;
+    btn.innerHTML = `<span class="ai-led"></span>${lt.label}`;
+    btn.onclick = () => {
+      if (aiActiveTypes.has(type)) { aiActiveTypes.delete(type); btn.classList.remove('on'); }
+      else { aiActiveTypes.add(type); btn.classList.add('on'); }
+      aiRenderLights();
+    };
+    tg.appendChild(btn);
+  });
+
+  aiRenderLights();
+  aiShowAnalyzing(false);
+  document.getElementById('ai-p1-next').style.display = 'block';
+  aiBuildConfirmRows(d);
+}
+
+// ── SVG LIGHTS ──
+function aiRenderLights() {
+  const svg = document.getElementById('aiLightSvg');
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  svg.innerHTML = ''; svg.appendChild(defs);
+  document.getElementById('aiNightOverlay').style.opacity = aiActiveTypes.size > 0 ? '0.62' : '0.85';
+
+  Object.entries(aiCurrentLights).forEach(([type, lights]) => {
+    if (!aiActiveTypes.has(type)) return;
+    const lt = AI_LIGHT_TYPES[type]; if (!lt) return;
+    lights.forEach((l, i) => {
+      const eff = l.intensity * aiGlobalIntensity;
+      const gid = `aig-${type}-${i}`;
+      const grad = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+      grad.setAttribute('id', gid); grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+      grad.setAttribute('cx', l.cx + '%'); grad.setAttribute('cy', l.cy + '%');
+      grad.setAttribute('r', Math.max(l.rx, l.ry) + '%');
+      [[0,(eff*.92).toFixed(2)],[55,(eff*.26).toFixed(2)],[100,'0']].forEach(([off,op]) => {
+        const s = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        s.setAttribute('offset', off + '%'); s.setAttribute('stop-color', lt.color); s.setAttribute('stop-opacity', op);
+        grad.appendChild(s);
+      });
+      defs.appendChild(grad);
+      const el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+      el.setAttribute('cx', l.cx + '%'); el.setAttribute('cy', l.cy + '%');
+      el.setAttribute('rx', l.rx + '%'); el.setAttribute('ry', l.ry + '%');
+      el.setAttribute('fill', `url(#${gid})`); el.style.mixBlendMode = 'screen';
+      svg.appendChild(el);
+      if (type !== 'moonlight') {
+        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', l.cx + '%'); c.setAttribute('cy', (l.cy + l.ry * .65) + '%');
+        c.setAttribute('r', '0.45%'); c.setAttribute('fill', lt.color);
+        c.setAttribute('opacity', (eff * .85).toFixed(2)); c.style.mixBlendMode = 'screen';
+        svg.appendChild(c);
+      }
+    });
+  });
+}
+
+document.getElementById('aiISlider').addEventListener('input', e => {
+  aiGlobalIntensity = parseFloat(e.target.value); aiRenderLights();
+});
+
+// ── CONFIRM ROWS ──
+function aiBuildConfirmRows(d) {
+  const container = document.getElementById('aiConfirmRows');
+  container.innerHTML = '';
+
+  container.appendChild(aiMakeSection('Property Details'));
+  container.appendChild(aiMakeCRow({
+    key:'ai-propertyType', label:'Property Type',
+    val: AI_PROP_LABELS[d.propertyType] || d.propertyType, why: d.propertyTypeReason,
+    editType:'single',
+    options:[{val:'residential-single',label:'Single Family'},{val:'residential-estate',label:'Estate / Acreage'},{val:'townhome',label:'Townhome'},{val:'commercial',label:'Commercial'}],
+    current: d.propertyType, onConfirm: v => aiS.propertyType = v,
+  }));
+  container.appendChild(aiMakeCRow({
+    key:'ai-lotIdx', label:'Lot Size',
+    val: AI_LOT_LABELS[d.lotIdx ?? 1], why: d.lotReason,
+    editType:'single',
+    options: AI_LOT_LABELS.map((l,i) => ({val:i,label:l})),
+    current: d.lotIdx ?? 1, onConfirm: v => aiS.lotIdx = parseInt(v),
+  }));
+  container.appendChild(aiMakeCRow({
+    key:'ai-frontIdx', label:'Facade / Frontage Width',
+    val: AI_FRONT_LABELS[d.frontIdx ?? 2], why: d.frontReason,
+    editType:'single',
+    options: AI_FRONT_LABELS.map((l,i) => ({val:i,label:l})),
+    current: d.frontIdx ?? 2, onConfirm: v => aiS.frontIdx = parseInt(v),
+  }));
+  container.appendChild(aiMakeCRow({
+    key:'ai-stories', label:'Number of Stories',
+    val: d.stories + '-story home', why: null,
+    editType:'single',
+    options:[{val:1,label:'1 Story'},{val:2,label:'2 Stories'},{val:3,label:'3+ Stories'}],
+    current: d.stories, onConfirm: v => aiS.stories = parseInt(v),
+  }));
+
+  container.appendChild(aiMakeSection('Lighting Services Detected'));
+  container.appendChild(aiMakeCRow({
+    key:'ai-services', label:'Recommended Service Zones',
+    val: d.services.map(s => (AI_SVC_META[s]?.emoji||'') + ' ' + (AI_SVC_META[s]?.label||s)).join('  ·  '),
+    why: d.servicesReason, editType:'multi',
+    options: Object.entries(AI_SVC_META).map(([val,m]) => ({val, label: m.emoji+' '+m.label})),
+    current: d.services, onConfirm: v => aiS.services = v,
+  }));
+
+  container.appendChild(aiMakeSection('Additional Features'));
+  container.appendChild(aiMakeCRow({
+    key:'ai-hasPool', label:'Pool or Water Feature',
+    val: d.hasPool ? 'Pool detected in photo' : 'No pool detected',
+    why: d.hasPool ? "We spotted a pool — we'll include submersible lighting." : "No pool visible. If you have one, tap Edit.",
+    editType:'single',
+    options:[{val:true,label:'Yes, I have a pool'},{val:false,label:'No pool'}],
+    current: d.hasPool, onConfirm: v => aiS.hasPool = (v === true || v === 'true'),
+  }));
+  container.appendChild(aiMakeCRow({
+    key:'ai-hasTrees', label:'Trees / Canopy',
+    val: d.hasTrees ? 'Trees detected — moonlighting & spotlights possible' : 'No significant trees detected',
+    why: null, editType:'single',
+    options:[{val:true,label:'Yes, I have trees'},{val:false,label:'No significant trees'}],
+    current: d.hasTrees, onConfirm: v => aiS.hasTrees = (v === true || v === 'true'),
+  }));
+}
+
+function aiMakeSection(label) {
+  const div = document.createElement('div');
+  div.className = 'ai-sec'; div.style.marginTop = '24px';
+  div.textContent = label;
+  return div;
+}
+
+function aiMakeCRow({ key, label, val, why, editType, options, current, onConfirm }) {
+  const row = document.createElement('div');
+  row.className = 'ai-crow'; row.dataset.key = key;
+
+  const left = document.createElement('div');
+  left.innerHTML = `<div class="ai-crow-key">${label}</div><div class="ai-crow-val" id="cv-${key}">${val}</div>${why ? `<div class="ai-crow-why">${why}</div>` : ''}`;
+
+  const right = document.createElement('div');
+  right.className = 'ai-crow-right';
+
+  const yesBtn = document.createElement('button');
+  yesBtn.className = 'cta-yes'; yesBtn.innerHTML = '✓ Correct';
+  yesBtn.onclick = () => { row.classList.add('confirmed'); row.classList.remove('edited'); onConfirm(current); };
+
+  const editBtn = document.createElement('button');
+  editBtn.className = 'cta-edit'; editBtn.innerHTML = '✎ Edit';
+
+  const editArea = document.createElement('div');
+  editArea.className = 'ai-inline-edit';
+
+  if (editType === 'single') {
+    const optsDiv = document.createElement('div'); optsDiv.className = 'ai-ie-opts';
+    options.forEach(opt => {
+      const b = document.createElement('button'); b.className = 'ai-ie-opt';
+      b.textContent = opt.label; b.dataset.val = opt.val;
+      if (String(opt.val) === String(current)) b.classList.add('sel');
+      b.onclick = () => {
+        optsDiv.querySelectorAll('.ai-ie-opt').forEach(x => x.classList.remove('sel'));
+        b.classList.add('sel'); current = opt.val;
+        document.getElementById('cv-' + key).textContent = opt.label;
+        onConfirm(opt.val); row.classList.add('edited'); row.classList.remove('confirmed');
+        editArea.classList.remove('show');
+      };
+      optsDiv.appendChild(b);
+    });
+    editArea.appendChild(optsDiv);
+  } else if (editType === 'multi') {
+    const optsDiv = document.createElement('div'); optsDiv.className = 'ai-ie-opts';
+    const hint = document.createElement('div'); hint.className = 'ai-multi-hint'; hint.textContent = 'Tap to toggle — select all that apply';
+    let selected = [...current];
+    options.forEach(opt => {
+      const b = document.createElement('button'); b.className = 'ai-ie-opt';
+      b.textContent = opt.label;
+      if (selected.includes(opt.val)) b.classList.add('sel');
+      b.onclick = () => {
+        b.classList.toggle('sel');
+        if (selected.includes(opt.val)) selected = selected.filter(x => x !== opt.val);
+        else selected.push(opt.val);
+        document.getElementById('cv-' + key).innerHTML = selected.map(s => (AI_SVC_META[s]?.emoji||'') + (AI_SVC_META[s]?.label||s)).join('  ·  ') || 'None selected';
+        onConfirm(selected); row.classList.add('edited');
+      };
+      optsDiv.appendChild(b);
+    });
+    editArea.appendChild(hint); editArea.appendChild(optsDiv);
+  }
+
+  editBtn.onclick = () => editArea.classList.toggle('show');
+  right.appendChild(yesBtn); right.appendChild(editBtn);
+  row.appendChild(left); row.appendChild(right); row.appendChild(editArea);
+  return row;
+}
+
+// ── GOAL SELECT ──
+function aiSetGoal(el) {
+  document.querySelectorAll('#aiGoalGrid .ai-crow').forEach(c => c.classList.remove('confirmed'));
+  el.classList.add('confirmed');
+  aiS.goal = el.dataset.goal;
+}
+document.querySelector('#aiGoalGrid .ai-crow').classList.add('confirmed');
+
+// ── QUOTE ENGINE ──
+function aiBuildQuote() {
+  aiS.name     = (document.getElementById('ai-fname').value + ' ' + document.getElementById('ai-lname').value).trim();
+  aiS.phone    = document.getElementById('ai-phone').value;
+  aiS.email    = document.getElementById('ai-email').value;
+  aiS.zip      = document.getElementById('ai-zip').value;
+  aiS.timeline = document.getElementById('ai-timeline').value;
+  aiS.notes    = document.getElementById('ai-notes').value;
+
+  const svcs = aiS.services.length > 0 ? aiS.services : ['landscape'];
+  let matLo = 0, matHi = 0;
+  svcs.forEach(s => { const [lo,hi] = AI_SVC_COST[s]||[500,1200]; matLo+=lo; matHi+=hi; });
+
+  const mult = (AI_LOT_MULT[aiS.lotIdx]||1) * (AI_FRONT_MULT[aiS.frontIdx]||1)
+             * (AI_PROP_MULT[aiS.propertyType]||1) * (AI_GOAL_MULT[aiS.goal]||1)
+             * (AI_STORY_MULT[Math.min(aiS.stories,3)]||1) * (aiS.hasPool ? 1.12 : 1);
+  matLo = Math.round(matLo * mult / 100) * 100;
+  matHi = Math.round(matHi * mult / 100) * 100;
+  const labLo = Math.round(matLo * .55 / 100) * 100;
+  const labHi = Math.round(matHi * .55 / 100) * 100;
+  const totLo = matLo + labLo + 200;
+  const totHi = matHi + labHi + 450;
+
+  const pt = {'residential-single':'RS','residential-estate':'ES','townhome':'TH','commercial':'CM'}[aiS.propertyType]||'XX';
+  const code = `OLP-${pt}-${svcs.map(s=>s.slice(0,2).toUpperCase()).join('')}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  window._aiQuoteCode = code;
+
+  const first = aiS.name ? aiS.name.split(' ')[0] + "'s" : 'Your';
+  document.getElementById('ai-q-name').innerHTML = `${first} <em>custom scope</em>`;
+  document.getElementById('ai-q-sub').textContent = `${AI_PROP_LABELS[aiS.propertyType]} · ${AI_LOT_LABELS[aiS.lotIdx]} · ${aiS.stories}-story`;
+  document.getElementById('ai-q-price').textContent  = `$${totLo.toLocaleString()} – $${totHi.toLocaleString()}`;
+  document.getElementById('ai-q-mat').textContent    = `$${matLo.toLocaleString()} – $${matHi.toLocaleString()}`;
+  document.getElementById('ai-q-lab').textContent    = `$${labLo.toLocaleString()} – $${labHi.toLocaleString()}`;
+  document.getElementById('ai-q-ctrl').textContent   = '$200 – $450';
+  document.getElementById('ai-q-total').textContent  = `$${totLo.toLocaleString()} – $${totHi.toLocaleString()}`;
+  document.getElementById('ai-q-code').textContent   = code;
+  document.getElementById('ai-q-chips').innerHTML    = svcs.map(s=>`<span class="ai-scope-chip">${AI_SVC_META[s]?.emoji||''} ${AI_SVC_META[s]?.label||s}</span>`).join('');
+  document.getElementById('ai-q-disc').textContent   = 'Estimate generated from AI photo analysis confirmed by you. Actual pricing depends on site conditions, fixture brand/grade, and any concrete or trenching required. A free design consultation produces a firm line-item quote with no obligation.';
+
+  aiGoTo(4);
+}
+
+function aiCopyCode() {
+  if (navigator.clipboard && window._aiQuoteCode) {
+    navigator.clipboard.writeText(window._aiQuoteCode).then(() => {
+      const b = document.getElementById('aiCopyBtn');
+      b.textContent = 'Copied!';
+      setTimeout(() => b.textContent = 'Copy', 1800);
+    });
+  }
+}
+
+function aiReset() {
+  document.getElementById('aiScene').style.display = 'none';
+  document.getElementById('ai-p1-next').style.display = 'none';
+  document.getElementById('aiUploadZone').style.display = 'block';
+  document.getElementById('aiLightSvg').innerHTML = '';
+  document.getElementById('aiTogGroup').innerHTML = '';
+  document.getElementById('aiConfirmRows').innerHTML = '';
+  document.getElementById('aiFileInput').value = '';
+  aiImageBase64 = null; aiCurrentLights = {}; aiActiveTypes = new Set();
+  aiGoTo(1);
+}
+</script>
+</body>
+</html>

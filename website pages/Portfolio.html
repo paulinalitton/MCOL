@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfolio — Music City Outdoor Lighting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b16;
+    --bg-2:#0c1220;
+    --ink:#f5efe1;
+    --ink-dim:#a9a394;
+    --ink-faint:#5a5547;
+    --amber:#f0c074;
+    --amber-glow:#ffd89a;
+    --rule:rgba(245,239,225,.12);
+    --rule-strong:rgba(245,239,225,.28);
+    --serif:"Cormorant Garamond",serif;
+    --sans:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  img,video{display:block;max-width:100%}
+
+  /* ─────── page header ─────── */
+  .page-head{
+    padding:32px 48px;border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    position:sticky;top:0;background:rgba(7,11,22,.92);backdrop-filter:blur(12px);z-index:80;
+  }
+  .brand{display:flex;align-items:baseline;gap:14px}
+  .brand h1{font-family:var(--serif);font-weight:300;font-size:22px;letter-spacing:-0.005em}
+  .brand h1 em{font-style:italic;color:var(--amber)}
+  .brand .tag{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
+  .nav{display:flex;gap:6px}
+  .nav a{padding:8px 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);border:1px solid transparent;border-radius:999px;transition:all .2s}
+  .nav a:hover{color:var(--ink)}
+  .nav a.on{color:var(--amber);border-color:var(--rule)}
+
+  /* ─────── hero strip ─────── */
+  .hero{padding:96px 48px 56px;border-bottom:1px solid var(--rule);position:relative}
+  .hero .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .hero .eyebrow .line{width:48px;height:1px;background:var(--amber)}
+  .hero h2{font-family:var(--serif);font-weight:300;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-0.02em;max-width:18ch}
+  .hero h2 em{font-style:italic;color:var(--amber)}
+  .hero .lede{margin-top:24px;font-size:16px;line-height:1.55;color:var(--ink-dim);max-width:62ch}
+  .hero .meta{display:flex;gap:32px;margin-top:36px;padding-top:28px;border-top:1px solid var(--rule)}
+  .hero .meta .stat{display:flex;flex-direction:column;gap:4px}
+  .hero .meta .stat .n{font-family:var(--serif);font-style:italic;font-size:32px;color:var(--amber);line-height:1;font-weight:400}
+  .hero .meta .stat .l{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim)}
+  .hero .hint{
+    position:absolute;right:48px;bottom:56px;
+    display:flex;align-items:center;gap:14px;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);
+  }
+  .hero .hint .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber-glow);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+
+  /* ─────── filter rail ─────── */
+  .filter-rail{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    padding:24px 48px;border-bottom:1px solid var(--rule);
+    position:sticky;top:88px;background:rgba(7,11,22,.92);backdrop-filter:blur(12px);z-index:70;
+  }
+  .filter-rail .lbl{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-faint);margin-right:14px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);
+    border:1px solid var(--rule);background:transparent;cursor:pointer;transition:all .2s;
+  }
+  .chip:hover{color:var(--ink);border-color:var(--rule-strong)}
+  .chip.on{color:var(--amber);border-color:var(--amber);background:rgba(240,192,116,.1)}
+  .chip .n{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink-faint);letter-spacing:0;text-transform:none;margin-left:2px}
+  .chip.on .n{color:var(--amber)}
+
+  /* ─────── grid ─────── */
+  .grid{
+    display:grid;gap:14px;padding:24px 48px 48px;
+    grid-template-columns:repeat(3,1fr);
+  }
+  /* feature the first card on wide screens */
+  @media (min-width:1280px){
+    .grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:auto}
+    .card.feat{grid-column:span 2;grid-row:span 2}
+  }
+  @media (max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.grid{grid-template-columns:1fr;padding:14px 14px 32px;gap:14px}}
+
+  .card{
+    position:relative;overflow:hidden;border-radius:6px;
+    background:#04060c;cursor:pointer;
+    aspect-ratio:4/3;
+    border:1px solid rgba(245,239,225,.06);
+    transition:transform .35s ease, border-color .35s ease, box-shadow .45s ease;
+    isolation:isolate;
+  }
+  .card:hover{
+    border-color:rgba(240,192,116,.45);
+    transform:translateY(-2px);
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.7), 0 0 60px -20px rgba(240,192,116,.35);
+  }
+  /* the unlit poster — same source video frame frozen, then darkened */
+  .card video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    background:#04060c;
+    /* until hovered, sit on the dark first frame; subtle tone shift */
+    transition:filter .9s ease, transform 1.4s ease;
+    filter:brightness(.55) saturate(.85) contrast(1.05);
+    transform:scale(1.02);
+  }
+  .card.lit video{
+    filter:brightness(1) saturate(1) contrast(1);
+    transform:scale(1);
+  }
+
+  /* state pill in corner */
+  .card .state{
+    position:absolute;top:14px;left:14px;z-index:3;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;border-radius:999px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-dim);background:rgba(7,11,22,.55);backdrop-filter:blur(8px);
+    border:1px solid var(--rule);transition:all .35s ease;
+    white-space:nowrap;
+  }
+  .card .state .led{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);transition:all .25s}
+  .card.lit .state{color:var(--amber);border-color:var(--amber)}
+  .card.lit .state .led{background:var(--amber);box-shadow:0 0 10px var(--amber-glow)}
+
+  /* category tag in corner */
+  .card .cat{
+    position:absolute;top:14px;right:14px;z-index:3;
+    padding:6px 12px;border-radius:999px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink);background:rgba(7,11,22,.55);backdrop-filter:blur(8px);
+    border:1px solid var(--rule);
+    white-space:nowrap;max-width:calc(100% - 28px);overflow:hidden;text-overflow:ellipsis;
+  }
+
+  /* bottom info strip */
+  .card .info{
+    position:absolute;left:0;right:0;bottom:0;z-index:3;
+    padding:24px 18px 18px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    background:linear-gradient(to top, rgba(7,11,22,.95) 0%, rgba(7,11,22,.78) 35%, rgba(7,11,22,.35) 70%, rgba(7,11,22,0) 100%);
+    transition:padding .35s ease;
+  }
+  .card:hover .info{padding-bottom:22px}
+  .card .info .name{
+    font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.05;letter-spacing:-0.005em;
+    text-wrap:balance;
+  }
+  .card .info .where{
+    margin-top:4px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);
+  }
+  .card .info .num{
+    font-family:var(--serif);font-style:italic;font-size:18px;color:var(--amber);
+    flex:0 0 auto;
+  }
+
+  /* play affordance */
+  .card .play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+    width:64px;height:64px;border-radius:50%;
+    background:rgba(7,11,22,.45);backdrop-filter:blur(10px);
+    border:1px solid rgba(240,192,116,.5);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .35s ease, transform .35s ease, background .35s ease;
+    pointer-events:none;
+  }
+  .card .play svg{width:22px;height:22px;fill:var(--amber);margin-left:3px}
+  .card.lit .play{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+  .card .play::after{
+    content:"";position:absolute;inset:-8px;border-radius:50%;
+    border:1px solid rgba(240,192,116,.18);
+    animation:pulse-ring 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse-ring{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.18);opacity:.1}}
+
+  /* progress bar (subtle, only when lit) */
+  .card .prog{
+    position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(245,239,225,.06);z-index:4;
+    opacity:0;transition:opacity .3s ease;
+  }
+  .card.lit .prog{opacity:1}
+  .card .prog .fill{height:100%;width:0%;background:var(--amber);box-shadow:0 0 10px var(--amber-glow);transition:width .15s linear}
+
+  /* card aspect overrides (some videos are vertical/horizontal differently — caller can override) */
+  .card.tall{aspect-ratio:3/4}
+  .card.wide{aspect-ratio:16/9}
+
+  /* ─────── footer / closer ─────── */
+  .closer{
+    border-top:1px solid var(--rule);padding:96px 48px;
+    display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;
+  }
+  .closer h3{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.5vw,64px);line-height:.98;letter-spacing:-0.015em;max-width:18ch}
+  .closer h3 em{font-style:italic;color:var(--amber)}
+  .closer .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:all .2s;cursor:pointer}
+  .btn-amber{background:var(--amber);color:#1a1305}
+  .btn-amber:hover{background:var(--amber-glow);transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--rule-strong);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  @media (max-width:760px){
+    .closer{grid-template-columns:1fr;padding:64px 24px}
+    .page-head{padding:20px 24px;flex-wrap:wrap}
+    .nav{order:3;width:100%;overflow:auto;-webkit-overflow-scrolling:touch}
+    .filter-rail{padding:16px 24px;top:auto;position:static}
+    .hero{padding:64px 24px 40px}
+    .hero .hint{position:static;margin-top:32px;justify-content:flex-start}
+  }
+
+  /* prefer-reduced-motion */
+  @media (prefers-reduced-motion:reduce){
+    .card video,.card,.card .info,.card .play{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="brand">
+    <h1>Music City <em>Outdoor Lighting</em></h1>
+    <span class="tag">Nashville, TN</span>
+  </div>
+  <nav class="nav">
+    <a href="Home.html">Home</a>
+    <a href="Home.html#services">Services</a>
+    <a href="about.html">About</a>
+    <a class="on" href="Portfolio.html">Portfolio</a>
+    <a href="estimator.html">Estimator</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow"><span class="line"></span>The Portfolio · Hover · Light · Linger</div>
+  <h2>Every property has<br>a <em>second face</em><br>after dark.</h2>
+  <p class="lede">Hover any project to watch the lights come up — same camera, same composition, dusk to designed in twelve seconds. These are real Nashville-area homes we've lit, captured at the moment the system switches on.</p>
+  <div class="meta">
+    <div class="stat"><span class="n">1,400+</span><span class="l">Homes Lit</span></div>
+    <div class="stat"><span class="n">12 yrs</span><span class="l">In Middle Tennessee</span></div>
+    <div class="stat"><span class="n">5★</span><span class="l">Google &amp; BBB</span></div>
+    <div class="stat"><span class="n">07</span><span class="l">Featured Projects</span></div>
+  </div>
+  <div class="hint"><span class="dot"></span><span>Hover to light · Tap on mobile</span></div>
+</section>
+
+<div class="filter-rail">
+  <span class="lbl">Filter by</span>
+  <button class="chip on" data-filter="all">All Work <span class="n">12</span></button>
+  <button class="chip" data-filter="landscape">Landscape <span class="n">09</span></button>
+  <button class="chip" data-filter="architectural">Architectural <span class="n">02</span></button>
+  <button class="chip" data-filter="pool">Pool &amp; Patio <span class="n">02</span></button>
+  <button class="chip" data-filter="aerial">Aerial <span class="n">01</span></button>
+  <button class="chip" data-filter="commercial">Commercial <span class="n">01</span></button>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- 01 — feature -->
+  <article class="card feat" data-cats="landscape architectural">
+    <video src="MCOL_Videos/231006 LLP-100.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape · Architectural</span>
+    <div class="info">
+      <div>
+        <div class="name">The LLP Residence</div>
+        <div class="where">Brentwood, TN · 2023</div>
+      </div>
+      <span class="num">i.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 02 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/250619 Mulholland-21.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Mulholland</div>
+        <div class="where">Franklin, TN · 2025</div>
+      </div>
+      <span class="num">ii.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 03 -->
+  <article class="card" data-cats="pool">
+    <video src="MCOL_Videos/2505 Sanfilippo-61.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Pool &amp; Patio</span>
+    <div class="info">
+      <div>
+        <div class="name">Sanfilippo</div>
+        <div class="where">Belle Meade, TN · 2025</div>
+      </div>
+      <span class="num">iii.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 04 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/250611 Ryan-20.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Ryan</div>
+        <div class="where">Forest Hills, TN · 2025</div>
+      </div>
+      <span class="num">iv.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 05 -->
+  <article class="card" data-cats="aerial landscape">
+    <video src="MCOL_Videos/Adams Drone-6.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Aerial Showcase</span>
+    <div class="info">
+      <div>
+        <div class="name">Adams Estate</div>
+        <div class="where">Nashville, TN · Drone</div>
+      </div>
+      <span class="num">v.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 06 -->
+  <article class="card" data-cats="architectural pool">
+    <video src="MCOL_Videos/Hawks-13.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Architectural Wash</span>
+    <div class="info">
+      <div>
+        <div class="name">Hawks Residence</div>
+        <div class="where">Green Hills, TN</div>
+      </div>
+      <span class="num">vi.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 07 -->
+  <article class="card" data-cats="commercial landscape">
+    <video src="MCOL_Videos/0731 Dunco-17.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Commercial · Landscape</span>
+    <div class="info">
+      <div>
+        <div class="name">Dunco</div>
+        <div class="where">Cool Springs, TN</div>
+      </div>
+      <span class="num">vii.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 08 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/250619 Keane-5.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Keane</div>
+        <div class="where">Nashville, TN · 2025</div>
+      </div>
+      <span class="num">viii.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 09 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/Hodges-2.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Hodges</div>
+        <div class="where">Franklin, TN</div>
+      </div>
+      <span class="num">ix.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 10 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/Hunter-36.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Hunter</div>
+        <div class="where">Brentwood, TN</div>
+      </div>
+      <span class="num">x.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 11 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/Morris-42.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Morris</div>
+        <div class="where">Nashville, TN</div>
+      </div>
+      <span class="num">xi.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+  <!-- 12 -->
+  <article class="card" data-cats="landscape">
+    <video src="MCOL_Videos/Pitta-4.mp4" muted loop playsinline preload="metadata"></video>
+    <span class="state"><span class="led"></span>Hover to light</span>
+    <span class="cat">Landscape Lighting</span>
+    <div class="info">
+      <div>
+        <div class="name">Pitta</div>
+        <div class="where">Franklin, TN</div>
+      </div>
+      <span class="num">xii.</span>
+    </div>
+    <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="prog"><div class="fill"></div></div>
+  </article>
+
+</div>
+
+<section class="closer">
+  <h3>Want your home in this <em>portfolio?</em></h3>
+  <div class="ctas">
+    <a class="btn btn-amber" href="Services.html#contact">Free Design Consultation</a>
+    <a class="btn btn-ghost" href="tel:6159051905">615-905-1905</a>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--rule);padding:48px;font-size:13px;color:var(--ink-dim);background:rgba(7,11,22,.6)">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;max-width:1400px;margin:0 auto">
+    <div>© 2026 Music City Outdoor Lighting · Locally owned in Franklin, TN</div>
+    <div style="display:flex;gap:28px;flex-wrap:wrap">
+      <a href="#" style="transition:color .2s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color=''">Privacy</a>
+      <a href="#" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color=''">Terms</a>
+      <a href="#" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color=''">ADA</a>
+      <a href="#" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color=''">Instagram</a>
+      <a href="#" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color=''">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const cards = document.querySelectorAll('.card');
+
+  // ensure first frame is rendered (some browsers skip drawing until play() once)
+  cards.forEach(card => {
+    const v = card.querySelector('video');
+    const prog = card.querySelector('.prog .fill');
+
+    // when metadata is ready, nudge currentTime so the unlit first frame shows
+    function showFirstFrame(){
+      try { v.currentTime = 0.05; } catch(e) {}
+    }
+    if (v.readyState >= 1) showFirstFrame();
+    else v.addEventListener('loadedmetadata', showFirstFrame, {once:true});
+
+    function light(){
+      card.classList.add('lit');
+      const p = v.play();
+      if (p && p.catch) p.catch(()=>{});
+    }
+    function unlight(){
+      card.classList.remove('lit');
+      v.pause();
+      try { v.currentTime = 0; } catch(e) {}
+      if (prog) prog.style.width = '0%';
+    }
+
+    // desktop: hover
+    card.addEventListener('mouseenter', light);
+    card.addEventListener('mouseleave', unlight);
+
+    // touch / mobile: tap to play, tap again or tap elsewhere to stop
+    card.addEventListener('click', (e) => {
+      // only handle taps that aren't from a real mouse hover device
+      if (matchMedia('(hover:hover)').matches) return;
+      e.preventDefault();
+      if (card.classList.contains('lit')) {
+        unlight();
+      } else {
+        // unlight any other lit card
+        document.querySelectorAll('.card.lit').forEach(c => {
+          if (c !== card) {
+            c.classList.remove('lit');
+            const ov = c.querySelector('video'); ov.pause(); try{ov.currentTime=0;}catch(e){}
+          }
+        });
+        light();
+      }
+    });
+
+    // progress bar
+    v.addEventListener('timeupdate', () => {
+      if (!prog || !v.duration) return;
+      prog.style.width = ((v.currentTime / v.duration) * 100) + '%';
+    });
+  });
+
+  // filter chips
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('on'));
+      chip.classList.add('on');
+      const f = chip.dataset.filter;
+      cards.forEach(card => {
+        const cats = (card.dataset.cats || '').split(/\s+/);
+        const show = f === 'all' || cats.includes(f);
+        card.style.display = show ? '' : 'none';
+        // also stop any hidden playing videos
+        if (!show) {
+          card.classList.remove('lit');
+          const v = card.querySelector('video');
+          v.pause(); try { v.currentTime = 0; } catch(e){}
+        }
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

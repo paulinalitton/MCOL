@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>About Us | Music City Outdoor Lighting — Nashville, Tennessee</title>
+<meta name="description" content="Over a decade of expert outdoor lighting design in Nashville. Learn the story, process, and philosophy behind Music City Outdoor Lighting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b16;
+    --ink:#f5efe1;
+    --ink-dim:#a9a394;
+    --ink-faint:#5a5547;
+    --amber:#f0c074;
+    --amber-glow:#ffd89a;
+    --rule:rgba(245,239,225,.14);
+    --rule-strong:rgba(245,239,225,.28);
+    --serif:"Cormorant Garamond",serif;
+    --sans:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ── NAV ── */
+  .page-head{
+    padding:32px 48px;border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    position:sticky;top:0;background:rgba(7,11,22,.92);backdrop-filter:blur(12px);z-index:80;
+  }
+  .page-head .brand{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:inherit}
+  .page-head .brand h1{font-family:var(--serif);font-weight:300;font-size:22px;letter-spacing:-0.005em}
+  .page-head .brand h1 em{font-style:italic;color:var(--amber)}
+  .page-head .brand .tag{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
+  .page-head .nav{display:flex;gap:6px;flex-wrap:wrap}
+  .page-head .nav a{padding:8px 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);border:1px solid transparent;border-radius:999px;transition:all .2s}
+  .page-head .nav a:hover{color:var(--ink)}
+  .page-head .nav a.on{color:var(--amber);border-color:var(--rule)}
+
+  /* ── BUTTONS ── */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:0}
+  .btn-amber{background:var(--amber);color:#1a1305}
+  .btn-amber:hover{background:var(--amber-glow);transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--rule-strong);color:var(--ink);background:rgba(7,11,22,.5);backdrop-filter:blur(8px)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+  /* ── HERO ── */
+  .about-hero{
+    position:relative;height:72vh;min-height:560px;overflow:hidden;
+    display:flex;align-items:flex-end;
+  }
+  .about-hero .bg{
+    position:absolute;inset:0;
+    background:url('../ServicePages/outdoor_lighting_v2.jpg') center 35% / cover no-repeat;
+  }
+  .about-hero .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to bottom,
+      rgba(7,11,22,.15) 0%,
+      rgba(7,11,22,.4) 50%,
+      rgba(7,11,22,.92) 100%);
+  }
+  .about-hero .content{
+    position:relative;z-index:2;
+    padding:0 80px 72px;
+    max-width:900px;
+  }
+  .about-hero .eyebrow{
+    font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:20px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .about-hero .eyebrow::before{content:"";display:block;width:32px;height:1px;background:var(--amber)}
+  .about-hero h2{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(42px,5.5vw,76px);line-height:.95;letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  .about-hero h2 em{font-style:italic;color:var(--amber)}
+  .about-hero p{
+    font-size:16px;line-height:1.65;color:rgba(245,239,225,.75);
+    max-width:58ch;
+  }
+
+  /* ── SHARED SECTION WRAPPER ── */
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+  .rule-line{height:1px;background:var(--rule);margin:0 64px}
+
+  /* ── PASSION SECTION ── */
+  .passion{padding:100px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .passion .text .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .passion .text h3{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4vw,54px);line-height:1.05;letter-spacing:-0.015em;margin-bottom:28px}
+  .passion .text h3 em{font-style:italic;color:var(--amber)}
+  .passion .text p{font-size:15px;line-height:1.75;color:var(--ink-dim);margin-bottom:20px}
+  .passion .text p:last-of-type{margin-bottom:36px}
+  .passion .photo{border-radius:4px;overflow:hidden;position:relative}
+  .passion .photo img{width:100%;height:480px;object-fit:cover}
+  .passion .photo::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(240,192,116,.08) 0%,transparent 60%);
+    z-index:1;pointer-events:none;
+  }
+  .passion .photo-credit{
+    position:absolute;bottom:20px;right:20px;z-index:2;
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,225,.4);
+  }
+
+  /* ── PROCESS ── */
+  .process{padding:100px 0;border-top:1px solid var(--rule)}
+  .process .intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:72px}
+  .process .intro .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .process .intro h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.015em}
+  .process .intro h3 em{font-style:italic;color:var(--amber)}
+  .process .intro p{font-size:15px;line-height:1.75;color:var(--ink-dim);margin-top:20px}
+  .process-steps{display:flex;flex-direction:column;gap:0}
+  .process-step{
+    display:grid;grid-template-columns:56px 1fr;gap:28px;
+    padding:28px 0;border-bottom:1px solid var(--rule);
+    align-items:start;transition:background .2s;
+  }
+  .process-step:first-child{border-top:1px solid var(--rule)}
+  .process-step .num{
+    font-family:var(--serif);font-style:italic;font-size:32px;
+    color:var(--amber);line-height:1;padding-top:2px;
+  }
+  .process-step .body h4{font-size:14px;font-weight:600;letter-spacing:.06em;margin-bottom:8px;text-transform:uppercase;color:var(--ink)}
+  .process-step .body p{font-size:14px;line-height:1.65;color:var(--ink-dim)}
+
+  /* ── JOURNEY PILLARS ── */
+  .journey{padding:100px 0;border-top:1px solid var(--rule)}
+  .journey .head{text-align:center;margin-bottom:64px}
+  .journey .head .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .journey .head h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4vw,52px);letter-spacing:-0.015em}
+  .journey .head h3 em{font-style:italic;color:var(--amber)}
+  .journey-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule)}
+  .journey-card{
+    background:var(--bg);padding:48px 36px;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    transition:background .25s;
+  }
+  .journey-card:hover{background:rgba(240,192,116,.04)}
+  .journey-card .icon{
+    width:52px;height:52px;border-radius:50%;
+    border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:24px;color:var(--amber);
+    transition:border-color .25s,box-shadow .25s;
+  }
+  .journey-card:hover .icon{border-color:var(--amber);box-shadow:0 0 20px rgba(240,192,116,.2)}
+  .journey-card .step-num{font-family:var(--serif);font-style:italic;font-size:11px;color:var(--amber);letter-spacing:.12em;margin-bottom:10px}
+  .journey-card h4{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:-0.005em;margin-bottom:12px}
+  .journey-card p{font-size:13px;color:var(--ink-dim);line-height:1.6}
+
+  /* ── FOUNDER ── */
+  .founder{padding:120px 0;border-top:1px solid var(--rule)}
+  .founder-inner{
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  .founder .photo{border-radius:4px;overflow:hidden;position:relative}
+  .founder .photo img{width:100%;height:520px;object-fit:cover;object-position:center 30%}
+  .founder .photo .badge{
+    position:absolute;bottom:32px;left:32px;
+    background:rgba(7,11,22,.8);backdrop-filter:blur(12px);
+    border:1px solid var(--rule);border-radius:4px;
+    padding:14px 20px;
+  }
+  .founder .photo .badge .label{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+  .founder .photo .badge .val{font-family:var(--serif);font-weight:300;font-size:22px;letter-spacing:-0.01em}
+  .founder .text .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .founder .text h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.5vw,50px);line-height:1.05;letter-spacing:-0.015em;margin-bottom:28px}
+  .founder .text h3 em{font-style:italic;color:var(--amber)}
+  .founder .text p{font-size:15px;line-height:1.75;color:var(--ink-dim);margin-bottom:20px}
+  .founder .text p:last-of-type{margin-bottom:36px}
+  .founder blockquote{
+    border-left:2px solid var(--amber);padding:0 0 0 24px;margin:36px 0;
+  }
+  .founder blockquote p{
+    font-family:var(--serif);font-style:italic;font-size:22px;
+    color:var(--ink);line-height:1.4;margin-bottom:0;
+  }
+
+  /* ── SERVICE AREAS ── */
+  .areas{padding:100px 0;border-top:1px solid var(--rule)}
+  .areas .head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+  .areas .head .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .areas .head h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.5vw,50px);line-height:1.05;letter-spacing:-0.015em}
+  .areas .head h3 em{font-style:italic;color:var(--amber)}
+  .areas .head p{font-size:15px;line-height:1.65;color:var(--ink-dim)}
+  .areas-grid{display:flex;flex-wrap:wrap;gap:10px}
+  .area-pill{
+    padding:12px 24px;border:1px solid var(--rule);border-radius:999px;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);
+    transition:all .2s;
+  }
+  .area-pill:hover{border-color:var(--amber);color:var(--amber);background:rgba(240,192,116,.06)}
+
+  /* ── TESTIMONIALS ── */
+  .testimonials{padding:100px 0;border-top:1px solid var(--rule)}
+  .testimonials .head{text-align:center;margin-bottom:64px}
+  .testimonials .head .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+  .testimonials .head h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.5vw,48px);letter-spacing:-0.015em}
+  .testimonials .head h3 em{font-style:italic;color:var(--amber)}
+  .rating-bar{
+    display:flex;align-items:center;gap:20px;justify-content:center;margin-bottom:56px;
+  }
+  .rating-bar .score{font-family:var(--serif);font-size:48px;font-weight:300;line-height:1}
+  .rating-bar .stars{color:var(--amber);font-size:22px;letter-spacing:2px;display:block;margin-bottom:4px}
+  .rating-bar .meta{font-size:12px;color:var(--ink-dim);letter-spacing:.06em}
+  .rating-bar .divider{width:1px;height:48px;background:var(--rule)}
+  .rating-bar .g{font-family:var(--serif);font-size:26px;color:var(--ink-dim)}
+  .testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .testi-card{
+    border:1px solid var(--rule);border-radius:6px;padding:28px;
+    transition:border-color .25s;
+  }
+  .testi-card:hover{border-color:var(--rule-strong)}
+  .testi-card .stars{color:var(--amber);font-size:14px;letter-spacing:2px;margin-bottom:16px}
+  .testi-card blockquote{
+    font-size:14px;line-height:1.7;color:var(--ink-dim);
+    margin-bottom:24px;font-style:italic;
+  }
+  .testi-card .author{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase}
+  .testi-card .via{font-size:11px;color:var(--ink-faint);letter-spacing:.06em;margin-top:2px}
+
+  /* ── FINAL CTA ── */
+  .final-cta{
+    padding:120px 64px;text-align:center;border-top:1px solid var(--rule);
+  }
+  .final-cta .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:20px}
+  .final-cta h3{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(36px,4.5vw,64px);line-height:1;letter-spacing:-0.02em;
+    margin-bottom:40px;max-width:16ch;margin-left:auto;margin-right:auto;
+  }
+  .final-cta h3 em{font-style:italic;color:var(--amber)}
+  .final-cta .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* ── FOOTER ── */
+  .site-footer{
+    padding:48px 64px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;
+    flex-wrap:wrap;
+  }
+  .site-footer .brand{font-family:var(--serif);font-weight:300;font-size:18px}
+  .site-footer .brand em{font-style:italic;color:var(--amber)}
+  .site-footer .links{display:flex;gap:24px;flex-wrap:wrap}
+  .site-footer .links a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);transition:color .2s}
+  .site-footer .links a:hover{color:var(--amber)}
+  .site-footer .copy{font-size:12px;color:var(--ink-faint)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1024px){
+    .passion,.process .intro,.founder-inner,.areas .head{grid-template-columns:1fr}
+    .passion .photo{order:-1}
+    .founder .photo{order:-1}
+    .testi-grid{grid-template-columns:repeat(2,1fr)}
+    .journey-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:720px){
+    .page-head{padding:20px 24px}
+    .about-hero .content{padding:0 32px 48px}
+    .wrap{padding:0 32px}
+    .rule-line{margin:0 32px}
+    .passion{padding:64px 0}
+    .process{padding:64px 0}
+    .journey{padding:64px 0}
+    .founder{padding:64px 0}
+    .areas{padding:64px 0}
+    .testimonials{padding:64px 0}
+    .final-cta{padding:80px 32px}
+    .site-footer{padding:36px 32px;flex-direction:column;align-items:flex-start;gap:20px}
+    .testi-grid{grid-template-columns:1fr}
+    .journey-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="page-head">
+  <a href="Home.html" class="brand">
+    <h1>Music City <em>Outdoor Lighting</em></h1>
+    <span class="tag">About Us</span>
+  </a>
+  <nav class="nav">
+    <a href="Home.html">Home</a>
+    <a href="Home.html#services">Services</a>
+    <a href="about.html" class="on">About</a>
+    <a href="Portfolio.html">Portfolio</a>
+    <a href="estimator.html">Estimator</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="about-hero">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="eyebrow">Our Story</div>
+    <h2>The story behind<br>our expert <em>outdoor lighting.</em></h2>
+    <p>With over a decade of experience right here in Nashville, we blend expert outdoor lighting design with the city's lively spirit to create outdoor environments that are simply stunning.</p>
+  </div>
+</section>
+
+<!-- ── PASSION & PURPOSE ── -->
+<div class="wrap">
+  <div class="passion">
+    <div class="text">
+      <div class="eyebrow">Our Passion &amp; Purpose</div>
+      <h3>We don't just hang lights.<br>We <em>compose</em> outdoor environments.</h3>
+      <p>At Music City Outdoor Lighting, we're passionate about creating outdoor spaces that make the Nashville spark. With over ten years of experience, our team blends expert design in low-voltage lighting and audio with the lively energy of Music City.</p>
+      <p>Just like every note in a song comes together to create something beautiful, we pay close attention to every little detail — helping you create your own outdoor paradise that looks incredible and feels like a true reflection of your style and story.</p>
+      <a href="#contact" class="btn btn-amber">Start a Conversation
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="photo">
+      <img src="../homepage image/llp-house-lit.jpg" alt="Professionally lit Nashville home at dusk">
+    </div>
+  </div>
+</div>
+<div class="rule-line"></div>
+
+<!-- ── HOW IT WORKS ── -->
+<div class="wrap">
+  <div class="process">
+    <div class="intro">
+      <div>
+        <div class="eyebrow">How It Works</div>
+        <h3>Simple. Collaborative.<br><em>Perfected.</em></h3>
+      </div>
+      <p>Our team makes bringing your outdoor vision to life simple and stress-free. We guide you every step of the way — from understanding your initial dreams to expert installation and fine-tuning. We make sure everything is perfect so you can simply relax and enjoy your beautiful new space.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="num">01</div>
+        <div class="body">
+          <h4>Share Your Ideas</h4>
+          <p>Tell us your vision, your lifestyle, and what you love about your property. Every great design starts with a conversation, not a sales pitch.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="num">02</div>
+        <div class="body">
+          <h4>We Visit Your Property</h4>
+          <p>Our designer walks your grounds at dusk to see exactly how light behaves on your architecture, trees, and landscape features.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="num">03</div>
+        <div class="body">
+          <h4>Custom Design &amp; Plan</h4>
+          <p>We create a tailored lighting composition — specific fixture placement, beam angles, and color temperature — unique to your home.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="num">04</div>
+        <div class="body">
+          <h4>Expert Installation</h4>
+          <p>Our licensed crew installs with precision, keeping your property clean and your turf undisturbed throughout the entire process.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="num">05</div>
+        <div class="body">
+          <h4>Ready to Enjoy</h4>
+          <p>We walk through every zone with you at night, make final adjustments, and hand you a system that just works — beautifully, every time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="rule-line"></div>
+
+<!-- ── JOURNEY PILLARS ── -->
+<div class="journey">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Your Journey</div>
+      <h3>From first call to<br><em>exceptional outdoor living.</em></h3>
+    </div>
+  </div>
+  <div class="journey-grid">
+    <div class="journey-card">
+      <div class="icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <div class="step-num">Step one</div>
+      <h4>Book an Appointment</h4>
+      <p>A relaxed, no-pressure consultation at your property — we come to you.</p>
+    </div>
+    <div class="journey-card">
+      <div class="icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="step-num">Step two</div>
+      <h4>Custom Design</h4>
+      <p>A hand-crafted lighting plan built around your home's unique architecture and character.</p>
+    </div>
+    <div class="journey-card">
+      <div class="icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="step-num">Step three</div>
+      <h4>Professional Installation</h4>
+      <p>Meticulous installation by our trained crew — clean, precise, and on schedule.</p>
+    </div>
+    <div class="journey-card">
+      <div class="icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      </div>
+      <div class="step-num">Step four</div>
+      <h4>Enjoy Your Lighting</h4>
+      <p>Step outside, pour a drink, and experience your property transformed. This is what we live for.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOUNDER / ARTISTIC APPROACH ── -->
+<div class="rule-line"></div>
+<div class="wrap">
+  <div class="founder">
+    <div class="founder-inner">
+      <div class="photo">
+        <img src="../ServicePages/outdoor_lighting_v2.jpg" alt="Music City Outdoor Lighting — estate project">
+        <div class="badge">
+          <div class="label">Nashville, TN</div>
+          <div class="val">Est. 2014</div>
+        </div>
+      </div>
+      <div class="text">
+        <div class="eyebrow">Your Outdoor Masterpiece</div>
+        <h3>An artistic approach<br>to outdoor <em>design.</em></h3>
+        <p>Our founder's experience in the music industry introduced a powerful understanding of how lighting, emotion, and a good performance blend to create unforgettable experiences. That same perspective guides every project we take on.</p>
+        <p>We don't just hang lights — we design dynamic compositions that evoke feeling and genuinely improve your environment. It's like carefully setting the stage for a live show, where every angle, shadow, and highlight is thoughtfully placed.</p>
+        <blockquote>
+          <p>"Our goal is to turn your property into the star of the show — where every detail perfectly contributes to an outdoor space that truly performs."</p>
+        </blockquote>
+        <a href="#contact" class="btn btn-amber">Book a Consultation
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="rule-line"></div>
+
+<!-- ── SERVICE AREAS ── -->
+<div class="wrap">
+  <div class="areas">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Where We Work</div>
+        <h3>Serving Middle <em>Tennessee.</em></h3>
+      </div>
+      <p>From Franklin estates to Gallatin neighborhoods, we bring the same level of craftsmanship and personal attention to every property across the Nashville metro area.</p>
+    </div>
+    <div class="areas-grid">
+      <span class="area-pill">Nashville</span>
+      <span class="area-pill">Brentwood</span>
+      <span class="area-pill">Franklin</span>
+      <span class="area-pill">Belle Meade</span>
+      <span class="area-pill">Green Hills</span>
+      <span class="area-pill">Hendersonville</span>
+      <span class="area-pill">Gallatin</span>
+      <span class="area-pill">Mt. Juliet</span>
+      <span class="area-pill">Spring Hill</span>
+      <span class="area-pill">Lebanon</span>
+      <span class="area-pill">Forest Hills</span>
+      <span class="area-pill">Bellevue</span>
+    </div>
+  </div>
+</div>
+<div class="rule-line"></div>
+
+<!-- ── TESTIMONIALS ── -->
+<div class="wrap">
+  <div class="testimonials">
+    <div class="head">
+      <div class="eyebrow">Client Stories</div>
+      <h3>What Nashville homeowners<br><em>say about us.</em></h3>
+    </div>
+    <div class="rating-bar">
+      <div>
+        <div class="score">5.0</div>
+      </div>
+      <div>
+        <span class="stars">★★★★★</span>
+        <div class="meta">Excellent · Based on 30+ reviews</div>
+      </div>
+      <div class="divider"></div>
+      <div class="g">Google</div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"If you are in search of a company that can transform ordinary spaces into extraordinary experiences, Music City Outdoor Lighting is the one to call. Absolutely stunning work."</blockquote>
+        <div class="author">Julio Cesar Bueno</div>
+        <div class="via">Google Review</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Music City Outdoor Lighting did an amazing job lighting my house! Their design really makes my house stand out. I get compliments from neighbors every week."</blockquote>
+        <div class="author">David</div>
+        <div class="via">Google Review</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"He was attentive and on time for every visit and phone call. His crews were polite, courteous, and cleaned up every day. Couldn't be happier with the result."</blockquote>
+        <div class="author">Bly Blazer</div>
+        <div class="via">Google Review</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Music City Outdoor Lighting addressed all of the lighting challenges that my residential project demanded. Professional from start to finish — what an incredible transformation."</blockquote>
+        <div class="author">David Elkins</div>
+        <div class="via">Google Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta" id="contact">
+  <div class="eyebrow">Ready to Begin?</div>
+  <h3>Let's light your<br><em>property brilliantly.</em></h3>
+  <div class="cta-btns">
+    <a class="btn btn-amber" href="#">Free Design Consultation
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <a class="btn btn-ghost" href="tel:6159051905">615-905-1905</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="brand">Music City <em>Outdoor Lighting</em></div>
+  <div class="links">
+    <a href="Home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Portfolio.html">Portfolio</a>
+    <a href="outdoor-lighting.html">Services</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="copy">&copy; 2025 Music City Outdoor Lighting · Nashville, TN</div>
+</footer>
+
+</body>
+</html>
