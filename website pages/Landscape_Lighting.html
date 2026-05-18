@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Professional Landscape Lighting Design | Nashville, Tennessee | Music City Outdoor Lighting</title>
-<meta name="description" content="Award-winning landscape lighting design in Nashville, Tennessee. 12+ years, 1,400+ projects. Custom outdoor lighting transforms your property. Free design consultation.">
-<meta name="keywords" content="landscape lighting Nashville, outdoor lighting Tennessee, landscape lights, professional lighting design, property lighting">
-<meta property="og:title" content="Professional Landscape Lighting Design | Nashville, Tennessee">
-<meta property="og:description" content="Award-winning landscape lighting design. 1,400+ projects completed. Free design consultation. 5★ Google rated.">
+<title>Landscape Lighting in Nashville TN | MCOL</title>
+<meta name="description" content="Award-winning landscape lighting design & installation in Nashville. 12+ yrs, 1,400+ projects. Free design consultation — book today.">
+<meta name="keywords" content="landscape lighting Nashville, low-voltage LED, uplighting for trees, path lights, garden lighting design, plant-safe fixtures">
+<meta property="og:title" content="Landscape Lighting in Nashville TN | MCOL">
+<meta property="og:description" content="Custom low-voltage LED landscape lighting in Nashville. Tree uplighting, path lights, garden washes — designed on-site at dusk.">
 <meta property="og:type" content="business.business">
 <meta property="og:image" content="uploads/llp-house-lit.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,8 +63,8 @@
     position:sticky;top:0;background:rgba(7,11,22,.92);backdrop-filter:blur(12px);z-index:80;
   }
   .page-head .brand{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:inherit}
-  .page-head .brand h1{font-family:var(--serif);font-weight:300;font-size:22px;letter-spacing:-0.005em}
-  .page-head .brand h1 em{font-style:italic;color:var(--amber)}
+  .page-head .brand .logo{font-family:var(--serif);font-weight:300;font-size:22px;letter-spacing:-0.005em}
+  .page-head .brand .logo em{font-style:italic;color:var(--amber)}
   .page-head .brand .tag{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
   .page-head .nav{display:flex;gap:6px;flex-wrap:wrap}
   .page-head .nav a{padding:8px 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);border:1px solid transparent;border-radius:999px;transition:all .2s}
@@ -594,6 +594,19 @@
     .area-info-panel{min-height:auto;position:static}
   }
   @media(max-width:768px){.areas-section{padding:40px 24px}}
+  .areas-link-grid{
+    margin-top:48px;padding-top:32px;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px 28px;
+  }
+  .areas-link{
+    font-family:var(--sans);font-size:13px;color:var(--ink-dim);
+    text-decoration:none;letter-spacing:.01em;line-height:1.4;
+    padding:6px 0;border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;
+  }
+  .areas-link:hover{color:var(--amber);border-bottom-color:var(--amber)}
+  @media(max-width:768px){.areas-link-grid{grid-template-columns:repeat(2,1fr);gap:10px 20px}}
+  @media(max-width:480px){.areas-link-grid{grid-template-columns:1fr}}
 
   /* ═══════════════ TESTIMONIALS ═══════════════ */
   .testimonials-section{
@@ -760,7 +773,7 @@
 
 <header class="page-head">
   <a href="Home.html" class="brand">
-    <h1>Music City <em>Outdoor Lighting</em></h1>
+    <span class="logo">Music City <em>Outdoor Lighting</em></span>
     <span class="tag">Landscape Lighting</span>
   </a>
   <nav class="nav">
@@ -788,7 +801,7 @@
   <div class="vignette"></div>
 
   <div class="copy">
-    <h2>Landscape lighting,<br>designed for <em>Tennessee nights.</em></h2>
+    <h1>Landscape Lighting in Nashville,<br>designed for <em>Tennessee nights.</em></h1>
     <p class="sub">Toggle each fixture type to see what your property looks like layer-by-layer. We design every system this way — one light at a time, then balanced together.</p>
   </div>
 
@@ -845,8 +858,8 @@
 
 <!-- ─────────────────── INTRO PARAGRAPH ─────────────────── -->
 <section class="intro-section">
-  <p>Professional landscape lighting transforms your Nashville home into an outdoor oasis. When the sun sets, strategic lighting reveals architectural details, highlights landscaping, and creates safe, inviting spaces that extend your living area into the night. At Music City Outdoor Lighting, we specialize in luxury landscape lighting design that elevates properties across Middle Tennessee.</p>
-  <p>With over 12 years of experience designing landscape lighting systems, we understand what makes outdoor spaces truly shine. Whether you're in Belle Meade, Green Hills, or anywhere across Nashville, our design-first approach ensures your landscape lighting looks stunning while enhancing property value and security. We've installed over 50,000 individual lights—each one placed with precision.</p>
+  <p>Landscape lighting in Nashville isn't about brightness — it's about depth. We design custom low-voltage LED systems that uplight mature trees, wash garden beds, mark winding paths, and pull architectural shapes out of the dark. Every fixture is plant-safe, fully concealed by day, and balanced against the next so no one corner of your yard overwhelms another.</p>
+  <p>From Belle Meade estates to Green Hills cottages, our landscape lighting design starts with a walk of your property at dusk — never a catalog. The result: a layered nightscape that highlights what your landscape architect spent a decade growing, deters trespassers without floodlight glare, and runs on a fraction of the power of older line-voltage systems.</p>
 </section>
 
 <!-- ─────────────────── WHY CHOOSE US ─────────────────── -->
@@ -1154,7 +1167,22 @@
       </div>
     </div>
   </div>
-</section>
+
+    <div class="areas-link-grid">
+      <a class="areas-link" href="belle-meade/landscape-lighting.html">Landscape Lighting in Belle Meade</a>
+      <a class="areas-link" href="bellevue/landscape-lighting.html">Landscape Lighting in Bellevue</a>
+      <a class="areas-link" href="brentwood/landscape-lighting.html">Landscape Lighting in Brentwood</a>
+      <a class="areas-link" href="forest-hills/landscape-lighting.html">Landscape Lighting in Forest Hills</a>
+      <a class="areas-link" href="franklin/landscape-lighting.html">Landscape Lighting in Franklin</a>
+      <a class="areas-link" href="gallatin/landscape-lighting.html">Landscape Lighting in Gallatin</a>
+      <a class="areas-link" href="green-hills/landscape-lighting.html">Landscape Lighting in Green Hills</a>
+      <a class="areas-link" href="hendersonville/landscape-lighting.html">Landscape Lighting in Hendersonville</a>
+      <a class="areas-link" href="lebanon/landscape-lighting.html">Landscape Lighting in Lebanon</a>
+      <a class="areas-link" href="mt-juliet/landscape-lighting.html">Landscape Lighting in Mt. Juliet</a>
+      <a class="areas-link" href="nashville/landscape-lighting.html">Landscape Lighting in Nashville</a>
+      <a class="areas-link" href="spring-hill/landscape-lighting.html">Landscape Lighting in Spring Hill</a>
+    </div>
+  </section>
 
 <!-- ─────────────────── TESTIMONIALS ─────────────────── -->
 <section class="testimonials-section">
@@ -1231,7 +1259,7 @@
         <span class="toggle">+</span>
       </div>
       <div class="faq-answer">
-        We serve Nashville, Franklin, Brentwood, Belle Meade, Green Hills, Forest Hills, Bellevue, Hendersonville, Gallatin, Spring Hill, Lebanon, Mt. Juliet, and surrounding Middle Tennessee areas. If you're not sure whether your area is included, contact us—we may be able to work with you.
+        Our landscape lighting crews regularly install across Davidson, Williamson, and Sumner counties — including Belle Meade, Green Hills, Forest Hills, Franklin, Brentwood, Bellevue, Hendersonville, Gallatin, Spring Hill, Lebanon, and Mt. Juliet. If your address sits just outside that radius, ask anyway — we travel for larger estate projects.
       </div>
     </div>
 
@@ -1307,7 +1335,7 @@
         "name": "What areas of Nashville do you serve?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We serve Nashville, Franklin, Brentwood, Belle Meade, Green Hills, Forest Hills, Bellevue, Hendersonville, Gallatin, Spring Hill, Lebanon, Mt. Juliet, and surrounding areas."
+          "text": "Landscape lighting installs run weekly across Davidson, Williamson, and Sumner counties — Belle Meade, Green Hills, Forest Hills, Franklin, Brentwood, Bellevue, Hendersonville, Gallatin, Spring Hill, Lebanon, and Mt. Juliet. Estate projects further out are negotiable."
         }
       },
       {
