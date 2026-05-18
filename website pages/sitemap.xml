@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: Confirm production domain with client.
-     Currently using musiccityoutdoorlighting.com, which project memory
-     flags as the competitor's domain. Update before submitting to
-     Google Search Console / Bing Webmaster Tools. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://musiccityoutdoorlighting.com/website%20pages/Home.html</loc>
