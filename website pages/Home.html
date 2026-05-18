@@ -536,6 +536,28 @@
 
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease}
   .reveal.in{opacity:1;transform:none}
+
+  /* ═════════ HOME SERVICE AREAS ═════════ */
+  .areas-cta-sub{
+    text-align:center;font-size:14px;color:var(--ink-dim);
+    max-width:62ch;margin:0 auto 40px;line-height:1.6;
+  }
+  .home-areas-grid{
+    max-width:880px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px 28px;
+  }
+  .home-areas-grid a{
+    font-family:var(--sans);font-size:14px;color:var(--ink-dim);
+    text-decoration:none;letter-spacing:.02em;text-align:center;
+    padding:10px 8px;border:1px solid var(--rule);border-radius:4px;
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .home-areas-grid a:hover{
+    color:var(--amber);border-color:var(--amber);
+    background:rgba(240,192,116,.04);
+  }
+  @media(max-width:768px){.home-areas-grid{grid-template-columns:repeat(3,1fr);gap:10px 16px}}
+  @media(max-width:480px){.home-areas-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -674,6 +696,29 @@
 </section>
 <div class="rule"></div>
 
+<!-- ═════════════════════════ SERVICE AREAS ═════════════════════════ -->
+<section class="cta-section" id="areas">
+  <div class="container reveal">
+    <div class="cta-eyebrow"><span class="line"></span><span>04 — Service Areas</span><span class="line"></span></div>
+    <h2>Twelve Middle Tennessee<br><em>neighborhoods.</em></h2>
+    <p class="areas-cta-sub">From Belle Meade estates to Spring Hill's newest communities — click your city to see how MCOL designs lighting for your area.</p>
+    <div class="home-areas-grid">
+      <a href="belle-meade/landscape-lighting.html">Belle Meade</a>
+      <a href="bellevue/landscape-lighting.html">Bellevue</a>
+      <a href="brentwood/landscape-lighting.html">Brentwood</a>
+      <a href="forest-hills/landscape-lighting.html">Forest Hills</a>
+      <a href="franklin/landscape-lighting.html">Franklin</a>
+      <a href="gallatin/landscape-lighting.html">Gallatin</a>
+      <a href="green-hills/landscape-lighting.html">Green Hills</a>
+      <a href="hendersonville/landscape-lighting.html">Hendersonville</a>
+      <a href="lebanon/landscape-lighting.html">Lebanon</a>
+      <a href="mt-juliet/landscape-lighting.html">Mt. Juliet</a>
+      <a href="nashville/landscape-lighting.html">Nashville</a>
+      <a href="spring-hill/landscape-lighting.html">Spring Hill</a>
+    </div>
+  </div>
+</section>
+<div class="rule"></div>
 
 
 <!-- ═════════════════════════ CONTACT ═════════════════════════ -->
