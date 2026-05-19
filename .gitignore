@@ -11,3 +11,8 @@
 # Local env
 .env
 .env.local
+
+# Scratch / WIP authoring directory — copy library + injector for the
+# in-progress SEO localization pass. Not for commit; the diffs land in
+# the HTML pages themselves.
+tmp_content/

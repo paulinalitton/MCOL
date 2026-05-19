@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://musiccityoutdoorlighting.com/website%20pages/sitemap.xml
+Sitemap: https://musiccityoutdoorlighting.com/sitemap.xml
