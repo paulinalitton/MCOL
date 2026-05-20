@@ -470,6 +470,38 @@ input[type=range].ai-isl::-webkit-slider-thumb {
   .ai-field.full { grid-column: span 1; }
   .or-divider, .ai-intro-band { padding: 0 18px; }
 }
+  /* nav-drop styles */
+  .page-head .nav .nav-drop{position:relative;display:inline-block}
+  .page-head .nav .nav-drop-trigger{
+    padding:8px 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);border:1px solid transparent;border-radius:999px;
+    cursor:pointer;display:inline-flex;align-items:center;gap:4px;
+    transition:all .2s;user-select:none;outline:none;
+  }
+  .page-head .nav .nav-drop-trigger.on{color:var(--amber);border-color:var(--rule)}
+  .page-head .nav .nav-drop:hover .nav-drop-trigger,
+  .page-head .nav .nav-drop:focus-within .nav-drop-trigger{color:var(--ink)}
+  .page-head .nav .nav-drop-trigger svg{transition:transform .25s}
+  .page-head .nav .nav-drop:hover .nav-drop-trigger svg,
+  .page-head .nav .nav-drop:focus-within .nav-drop-trigger svg{transform:rotate(180deg)}
+  .page-head .nav .nav-drop-panel{
+    position:absolute;top:calc(100% + 8px);right:0;
+    background:rgba(7,11,22,.96);border:1px solid var(--rule);border-radius:8px;
+    padding:8px 0;min-width:240px;opacity:0;visibility:hidden;
+    transform:translateY(-6px);
+    transition:opacity .15s,transform .15s,visibility 0s linear .15s;
+    backdrop-filter:blur(12px);z-index:90;
+  }
+  .page-head .nav .nav-drop:hover .nav-drop-panel,
+  .page-head .nav .nav-drop:focus-within .nav-drop-panel{
+    opacity:1;visibility:visible;transform:translateY(0);
+    transition:opacity .15s,transform .15s;
+  }
+  .page-head .nav .nav-drop-panel a{
+    display:block;padding:10px 20px;font-size:12px;letter-spacing:.1em;
+    text-transform:none;color:var(--ink-dim);border:0;border-radius:0;
+  }
+  .page-head .nav .nav-drop-panel a:hover{color:var(--amber);background:rgba(245,239,225,.04)}
 </style>
 </head>
 <body>
@@ -481,7 +513,23 @@ input[type=range].ai-isl::-webkit-slider-thumb {
   </a>
   <nav class="nav">
     <a href="Home.html">Home</a>
-    <a href="Home.html#services">Services</a>
+    <div class="nav-drop">
+      <span class="nav-drop-trigger" tabindex="0">
+        Services
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+      <div class="nav-drop-panel">
+        <a href="outdoor-lighting.html">Outdoor Lighting</a>
+        <a href="Landscape_Lighting.html">Landscape Lighting</a>
+        <a href="bistro-lighting.html">Bistro &amp; String Lighting</a>
+        <a href="pool-lighting.html">Pool Lighting</a>
+        <a href="home-exterior-lighting.html">Home Exterior Lighting</a>
+        <a href="security-lighting.html">Security Lighting</a>
+        <a href="christmas-lights.html">Christmas Lights</a>
+        <a href="commercial-lighting.html">Commercial Lighting</a>
+        <a href="outdoor-audio.html">Outdoor Audio</a>
+      </div>
+    </div>
     <a href="about.html">About</a>
     <a href="Portfolio.html">Portfolio</a>
     <a href="estimator.html" class="on">Estimator</a>
